@@ -199,7 +199,7 @@
 			<id>default-plugin-configurations</id>
 			<activation>
 				<file>
-					<missing>.maven-disable-default-plugin-configurations</missing>
+					<missing>.maven_disable_default-plugin-configurations</missing>
 				</file>
 			</activation>
 			<properties>
