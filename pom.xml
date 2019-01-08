@@ -179,32 +179,6 @@
 		</profile>
 		
 		<profile>
-			<id>test-suite-configuration</id>
-			<activation>
-				<file>
-					<exists>**/*TestSuite.class</exists>
-				</file>	
-			</activation>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.tycho</groupId>
-							<artifactId>tycho-surefire-plugin</artifactId>
-							<version>${tycho.version}</version>
-							<configuration>
-								<!-- Test suites explicitly defined as they are sumsuming each other and would lead to redundant test execution -->
-								<includes>
-									<include>**/*TestSuite.class</include>
-								</includes>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
-		</profile>
-					
-		<profile>
 			<id>compile-xtend</id>
 			<activation>
 				<file>
