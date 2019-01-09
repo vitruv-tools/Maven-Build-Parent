@@ -4,13 +4,9 @@ It defines default plugin configurations for running the Maven compiler, running
 
 ## Usage
 
-You can put the following marker files in the projects with this parent to disable certain features:
+The POM enables all compiler, tycho, packaging, feature, test, bundles and Xtend plugins used in Vitruv. Inheriting from this POM directly enables those plugins in the child projects.
 
-`.maven_disable_default-plugin-configurations`: Disables the default plugin configurations for Maven compilter, Tycho, sources, packaging, tests etc. (only disables plugin configuration, not their usage)
-
-`.maven_disable_default-plugin-usage`: Disables the default plugin usage for the default configurations (only disables plugin usage, not their configuration)
-
-`.maven_disable_compile-xtend`: Disables the Xtend compiler
+For building aggregated updatesites with the CBI aggregator, a marker file `.maven_enable_configuration-aggregated-updatesite` has to be placed within the project to enable building the updatesite.
 
 ## Deployment
 
