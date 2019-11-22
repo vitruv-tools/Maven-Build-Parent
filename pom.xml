@@ -386,6 +386,75 @@
 			</build>
 		</profile>
 
+		<!-- Enable this profile to generate metamodels from .genmodel files with the project, based on an MWE2 workflow.
+			Set the property "pathToMetamodelGenerationWorkflow" to the local project-relative path of the metamodel generation workflow. 
+			Set the property "metamodelGenerationTargetFolder" to the local project-relative path of the code generation folder".
+			Add an empty ".maven_enable_metamodel-generation" file to the project to enable the profile. -->
+		<profile>
+			<id>metamodel-generation</id>
+			<activation>
+				<file>
+					<exists>.maven_enable_metamodel-generation</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-clean-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>gen-clean</id>
+								<configuration>
+									<filesets combine.children="append">
+										<fileset>
+											<directory>${metamodelGenerationTargetFolder}</directory>
+											<includes>
+												<include>**/*</include>
+											</includes>
+										</fileset>
+									</filesets>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>generate-ecore</id>
+								<phase>generate-sources</phase>
+								<configuration>
+									<arguments>
+										<argument>/${project.basedir}/${pathToMetamodelGenerationWorkflow}</argument>
+										<argument>-p</argument>
+										<argument>rootPath=/${project.basedir}/..</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>compile-metamodel-code</id>
+								<phase>compile</phase>
+								<goals>
+									<goal>compile</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+
+		</profile>
+
 		<!-- Enable this profile to build the aggregated updatesite "updatesite.aggr" 
 			with the CBI aggregator within a project -->
 		<profile>
