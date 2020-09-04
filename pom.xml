@@ -38,7 +38,7 @@
 		<mwe.version>1.5.3</mwe.version>
 		<mwe2.version>2.11.3</mwe2.version>
 		<tycho.version>2.0.0</tycho.version>
-		<xtext.version>2.20.0</xtext.version>
+		<xtext.version>2.22.0</xtext.version>
 		<emf-codegen.version>2.21.0</emf-codegen.version>
 		<ecore-codegen.version>2.23.0</ecore-codegen.version>
 		<maven-clean.version>3.1.0</maven-clean.version>
@@ -54,7 +54,7 @@
 			<id>Eclipse 4.16 (2020-06)</id>
 			<layout>p2</layout>
 			<!--<url>http://download.eclipse.org/releases/2019-09</url> -->
-			<url>http://ftp-stud.hs-esslingen.de/pub/Mirrors/eclipse/releases/2019-09/</url>
+			<url>http://ftp-stud.hs-esslingen.de/pub/Mirrors/eclipse/releases/2020-06/</url>
 		</repository>
 		<repository>
 			<id>Eclipse 4.16 Updates</id>
