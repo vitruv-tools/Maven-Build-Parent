@@ -35,12 +35,13 @@
 	</scm>
 
 	<properties>
-		<mwe.version>1.5.0</mwe.version>
-		<mwe2.version>2.11.0</mwe2.version>
-		<tycho.version>1.5.1</tycho.version>
-		<xtext.version>2.19.0</xtext.version>
-		<emf-codegen.version>2.19.0</emf-codegen.version>
-		<ecore-codegen.version>2.19.0</ecore-codegen.version>
+		<mwe.version>1.5.3</mwe.version>
+		<mwe2.version>2.11.3</mwe2.version>
+		<tycho.version>2.0.0</tycho.version>
+		<xtext.version>2.20.0</xtext.version>
+		<emf-codegen.version>2.21.0</emf-codegen.version>
+		<ecore-codegen.version>2.23.0</ecore-codegen.version>
+		<maven-clean.version>3.1.0</maven-clean.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>11</java.version>
@@ -50,15 +51,15 @@
 
 	<repositories>
 		<repository>
-			<id>Eclipse 4.13 (2019-09)</id>
+			<id>Eclipse 4.16 (2020-06)</id>
 			<layout>p2</layout>
 			<!--<url>http://download.eclipse.org/releases/2019-09</url> -->
 			<url>http://ftp-stud.hs-esslingen.de/pub/Mirrors/eclipse/releases/2019-09/</url>
 		</repository>
 		<repository>
-			<id>Eclipse 4.13 Updates</id>
+			<id>Eclipse 4.16 Updates</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/eclipse/updates/4.13</url>
+			<url>http://download.eclipse.org/eclipse/updates/4.16</url>
 		</repository>
 		<repository>
 			<id>Vitruv License</id>
@@ -194,7 +195,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.1.0</version>
+					<version>${maven-clean.version}</version>
 					<executions>
 						<execution>
 							<id>gen-clean</id>
@@ -469,7 +470,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-clean-plugin</artifactId>
-						<version>3.1.0</version>
+						<version>${maven-clean.version}</version>
 						<executions>
 							<execution>
 								<id>workspace-clean</id>
