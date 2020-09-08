@@ -497,13 +497,13 @@
 								<repository>
 									<id>Eclipse</id>
 									<layout>p2</layout>
-									<!-- <url>http://download.eclipse.org/releases/oxygen</url> -->
-									<url>http://ftp-stud.hs-esslingen.de/pub/Mirrors/eclipse/releases/oxygen/</url>
+									<!-- <url>http://download.eclipse.org/releases/2020-06</url> -->
+									<url>http://ftp-stud.hs-esslingen.de/pub/Mirrors/eclipse/releases/2020-06/</url>
 								</repository>
 								<repository>
 									<id>Eclipse CBI Aggregator</id>
 									<layout>p2</layout>
-									<url>http://download.eclipse.org/cbi/updates/aggregator/ide/4.6/</url>
+									<url>http://download.eclipse.org/cbi/updates/aggregator/ide/4.13/</url>
 								</repository>
 							</repositories>
 							<jvmArgs>
