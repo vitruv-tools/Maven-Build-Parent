@@ -35,12 +35,12 @@
 	</scm>
 
 	<properties>
-		<mwe.version>1.5.3</mwe.version>
-		<mwe2.version>2.11.3</mwe2.version>
-		<tycho.version>2.0.0</tycho.version>
-		<xtext.version>2.22.0</xtext.version>
+		<mwe.version>1.6.0</mwe.version>
+		<mwe2.version>2.12.0</mwe2.version>
+		<tycho.version>2.1.0</tycho.version>
+		<xtext.version>2.24.0</xtext.version>
 		<emf-codegen.version>2.21.0</emf-codegen.version>
-		<ecore-codegen.version>2.23.0</ecore-codegen.version>
+		<ecore-codegen.version>2.24.0</ecore-codegen.version>
 		<maven-clean.version>3.1.0</maven-clean.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -51,15 +51,14 @@
 
 	<repositories>
 		<repository>
-			<id>Eclipse 4.16 (2020-06)</id>
+			<id>Eclipse 4.18 (2020-12)</id>
 			<layout>p2</layout>
-			<!--<url>http://download.eclipse.org/releases/2019-09</url> -->
-			<url>http://ftp-stud.hs-esslingen.de/pub/Mirrors/eclipse/releases/2020-06/</url>
+			<url>http://download.eclipse.org/releases/2020-12</url>
 		</repository>
 		<repository>
-			<id>Eclipse 4.16 Updates</id>
+			<id>Eclipse 4.18 Updates</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/eclipse/updates/4.16</url>
+			<url>http://download.eclipse.org/eclipse/updates/4.18</url>
 		</repository>
 		<repository>
 			<id>Vitruv License</id>
@@ -268,7 +267,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
-					<version>1.6.0</version>
+					<version>3.0.0</version>
 					<executions>
 						<execution>
 							<id>generate-ecore</id>
