@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>tools.vitruv</groupId>
@@ -399,7 +398,7 @@
 				</plugins>
 			</build>
 		</profile>
-		
+
 		<!-- Runs "workflow/generate.mwe2" workflow in generate-source phase, if existing, with dependencies for Ecore
 			metamodel code generation. If further dependencies are required, e.g., for Xtext language builds, add them
 			to the plugin via pluginManagement -->
@@ -437,26 +436,26 @@
 							</execution>
 						</executions>
 						<dependencies>
-						<dependency>
-							<groupId>org.eclipse.emf</groupId>
-							<artifactId>org.eclipse.emf.mwe2.lib</artifactId>
-							<version>${mwe2.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>org.eclipse.emf</groupId>
-							<artifactId>org.eclipse.emf.codegen</artifactId>
-							<version>${emf-codegen.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>org.eclipse.emf</groupId>
-							<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
-							<version>${ecore-codegen.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>org.eclipse.emf</groupId>
-							<artifactId>org.eclipse.emf.mwe.utils</artifactId>
-							<version>${mwe.version}</version>
-						</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.mwe2.lib</artifactId>
+								<version>${mwe2.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.codegen</artifactId>
+								<version>${emf-codegen.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
+								<version>${ecore-codegen.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.mwe.utils</artifactId>
+								<version>${mwe.version}</version>
+							</dependency>
 						</dependencies>
 					</plugin>
 
