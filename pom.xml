@@ -469,13 +469,12 @@
 			</build>
 		</profile>
 
-		<!-- Enable this profile to build the aggregated updatesite "updatesite.aggr" 
-			with the CBI aggregator within a project -->
+		<!-- Builds the aggregated updatesite "updatesite.aggr", if existing, with the CBI aggregator -->
 		<profile>
 			<id>aggregated-updatesite</id>
 			<activation>
 				<file>
-					<exists>.maven_enable_configuration-aggregated-updatesite</exists>
+					<exists>updatesite.aggr</exists>
 				</file>
 			</activation>
 			<build>
