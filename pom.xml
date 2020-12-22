@@ -55,11 +55,6 @@
 			<url>http://download.eclipse.org/releases/2020-12</url>
 		</repository>
 		<repository>
-			<id>Eclipse Updates</id>
-			<layout>p2</layout>
-			<url>http://download.eclipse.org/eclipse/updates/4.18</url>
-		</repository>
-		<repository>
 			<id>Vitruv License</id>
 			<layout>p2</layout>
 			<url>http://vitruv-tools.github.io/updatesite/release/license</url>
