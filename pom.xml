@@ -383,6 +383,13 @@
 								</configuration>
 							</execution>
 						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.eclipse.emf</groupId>
+								<artifactId>org.eclipse.emf.mwe.utils</artifactId>
+								<version>${mwe.version}</version>
+							</dependency>
+						</dependencies>
 					</plugin>
 
 					<!-- Define Xtend here to ensure that it is always executed after exec-maven-plugin when occuring in same phase -->
