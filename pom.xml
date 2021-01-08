@@ -28,9 +28,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/vitruv-tools/Maven-Build-Parents.git</connection>
-		<developerConnection>scm:git:ssh://github.com/vitruv-tools/Maven-Build-Parents.git</developerConnection>
-		<url>http://github.com/vitruv-tools/Maven-Build-Parents/tree/master</url>
+		<connection>scm:git:git://github.com/vitruv-tools/Maven-Build-Parent.git</connection>
+		<developerConnection>scm:git:ssh://github.com/vitruv-tools/Maven-Build-Parent.git</developerConnection>
+		<url>http://github.com/vitruv-tools/Maven-Build-Parent/tree/master</url>
 	</scm>
 
 	<properties>
