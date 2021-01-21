@@ -614,7 +614,7 @@
 			</build>
 		</profile>
 		
-		<!-- Configure tycho-surefire to run tests is a full Eclipse workbench with UI -->
+		<!-- Configure tycho-surefire to run tests in a full Eclipse workbench with UI -->
 		<profile>
 			<id>workbench-test</id>
 			<activation>
