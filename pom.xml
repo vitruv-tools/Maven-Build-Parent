@@ -219,6 +219,7 @@
 				    <version>${maven-surefire.version}</version>
 					<configuration>
 						<failIfNoTests>true</failIfNoTests>
+						<redirectTestOutputToFile>true</redirectTestOutputToFile>
 						<testClassesDirectory>target/classes</testClassesDirectory>
 					</configuration>
 				</plugin>
