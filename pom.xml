@@ -220,7 +220,8 @@
 					<configuration>
 						<failIfNoTests>true</failIfNoTests>
 						<redirectTestOutputToFile>true</redirectTestOutputToFile>
-						<testClassesDirectory>target/classes</testClassesDirectory>
+						<!-- We do not (need to) mark the source folder in eclipse-test-plugins as a test source folder, so classes are compiled into the ordinary output directory -->
+						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
 					</configuration>
 				</plugin>
 				  
