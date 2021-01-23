@@ -49,7 +49,7 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>Eclipse</id>
@@ -214,9 +214,9 @@
 
 				<!-- Run test with normal surefire -->
 				<plugin>
-				    <groupId>org.apache.maven.plugins</groupId>
-				    <artifactId>maven-surefire-plugin</artifactId>
-				    <version>${maven-surefire.version}</version>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire.version}</version>
 					<configuration>
 						<failIfNoTests>true</failIfNoTests>
 						<redirectTestOutputToFile>true</redirectTestOutputToFile>
@@ -224,8 +224,8 @@
 						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
 					</configuration>
 				</plugin>
-				  
-  				<!-- Run tests with Tycho surefire -->
+
+				<!-- Run tests with Tycho surefire -->
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-surefire-plugin</artifactId>
@@ -274,7 +274,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -558,7 +558,7 @@
 				</plugins>
 			</build>
 		</profile>
-		
+
 		<!-- Uses maven-surefire instead of tycho-surefire to run tests that do not require an Equinox platform -->
 		<profile>
 			<id>standalone-test</id>
@@ -576,15 +576,15 @@
 			<build>
 				<plugins>
 					<plugin>
-			    		<groupId>org.eclipse.tycho</groupId>
-					    <artifactId>tycho-surefire-plugin</artifactId>
-					    <executions>	
-					    	<execution>
-					    		<id>default-test</id>
-					    		<phase>none</phase>
-					    	</execution>
-					    </executions>
-		 		   </plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-surefire-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default-test</id>
+								<phase>none</phase>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
@@ -601,7 +601,7 @@
 				</plugins>
 			</build>
 		</profile>
-		
+
 		<!-- Configure tycho-surefire to run tests in a full Eclipse workbench with UI -->
 		<profile>
 			<id>workbench-test</id>
