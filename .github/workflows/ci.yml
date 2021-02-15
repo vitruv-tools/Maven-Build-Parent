@@ -7,7 +7,7 @@ on:
   pull_request:
 jobs:
   publish:
-    name: Publish
+    name: Verify and Publish
     runs-on: ubuntu-latest
     steps:
       - name: Install GPG secret key
@@ -37,7 +37,7 @@ jobs:
           -Dstyle.color=always
           -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
       - name: Deploy snapshot
-        if: github.repository_owner == 'vitruv-tools'
+        if: github.ref == 'refs/heads/master' && github.repository_owner == 'vitruv-tools'
         run: >
           mvn deploy
           --batch-mode
