@@ -36,19 +36,8 @@ jobs:
           --no-transfer-progress
           -Dstyle.color=always
           -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-      - name: Deploy snapshot
-        if: github.repository_owner == 'vitruv-tools'
-        run: >
-          mvn deploy
-          --batch-mode
-          --no-transfer-progress
-          -Dstyle.color=always
-          -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
       - name: Stage release
-        if: startsWith(github.ref, 'refs/tags/releases/') && github.repository_owner == 'vitruv-tools'
+        if: github.repository_owner == 'vitruv-tools'
         run: >
           mvn deploy -P release
           --batch-mode
