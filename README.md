@@ -10,9 +10,17 @@ For building aggregated updatesites with the CBI aggregator, a marker file `.mav
 
 ## Deployment
 
+### Automatic
+
+Deployment is automatically performed by GitHub Actions. Snapshot versions committed to the `master` branch are deployed to the Sonatype Snapshots repository. Commits with release versions that are also tagged as a release are deployed to the Sonatype Release repository.
+
+Both the Sonatype user and the GPG key used for signing are provided by secrets of the GitHub repository.
+
+### Manual
+
 Follow the [Sonatype documentation](https://central.sonatype.org/pages/apache-maven.html) for deployment instructions.
 
-Having set up a PGP key, use `mvn clean deploy` with an appropriate Sonatype Jira user defined in your `settings.xml` to deploy a snapshot to Sonatype.
+Having set up a GPG key, use `mvn clean deploy` with an appropriate Sonatype Jira user defined in your `settings.xml` to deploy a snapshot to Sonatype.
 
 To make a release, first change the version to a release version and then run `mvn clean deploy -P release`. This stages the release on the Sonatype Nexus server. To confirm the release and start the sync to Maven Central, run `mvn nexus-staging:release -P release`.
 Alternatively, confirm the release in the staging repository at the [Sonatype Nexus repository](https://oss.sonatype.org/).
