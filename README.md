@@ -1,12 +1,21 @@
 # Vitruv-Maven-Build-Parent
 A Maven parent specification for all Vitruv-related projects.
-It defines default plugin configurations for running the Maven compiler, running Tycho, generating sources, packaging bundles and features and running tests and for running Xtend.
+It defines default plugin configurations for running the Maven compiler, running Tycho, generating sources, packaging bundles and features, and running tests and for running Xtend.
 
 ## Usage
 
 The POM enables all compiler, tycho, packaging, feature, test, bundles and Xtend plugins used in Vitruv. Inheriting from this POM directly enables those plugins in the child projects.
 
-For building aggregated updatesites with the CBI aggregator, a marker file `.maven_enable_configuration-aggregated-updatesite` has to be placed within the project to enable building the updatesite.
+### Test Projects
+
+Projects ending with `.tests` are automatically interpreted as plugin test projects by Maven. By default, they set up an Eclipse/Equinox platform to run the tests on.
+If the test can be run without such a platform, it improves performance when running them as ordinary JUnit test. To do so, the POM provides a profile that can be activated for a project by placing the marker file `.tests-without-platform` in the project's root folder.
+In addition, some needs to be run in a full Eclipse workbench, i.e., with UI harness. To do so, the POM provides a profile that can be activated for a a project by placing the marker file `.tests-need-workbench` in the project's root folder.
+.tests-without-platform
+
+### Aggregated Updatesites
+
+For building aggregated updatesites with the CBI aggregator, the aggregator file named `updatesite.aggr` has to be placed within the project's main folder to enable building the updatesite.
 
 ## Deployment
 
