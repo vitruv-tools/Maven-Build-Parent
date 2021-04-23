@@ -34,18 +34,18 @@
 	</scm>
 
 	<properties>
-		<mwe.version>1.6.0</mwe.version>
-		<mwe2.version>2.12.0</mwe2.version>
-		<tycho.version>2.2.0</tycho.version>
-		<xtext.version>2.24.0</xtext.version>
+		<mwe.version>1.6.1</mwe.version>
+		<mwe2.version>2.12.1</mwe2.version>
+		<tycho.version>2.3.0</tycho.version>
+		<xtext.version>2.25.0</xtext.version>
 		<emf-codegen.version>2.21.0</emf-codegen.version>
-		<ecore-codegen.version>2.24.0</ecore-codegen.version>
+		<ecore-codegen.version>2.25.0</ecore-codegen.version>
 		<maven-clean.version>3.1.0</maven-clean.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven-compiler.version>3.8.1</maven-compiler.version>
 		<maven-surefire.version>2.22.2</maven-surefire.version>
-		<junit-jupiter.version>5.7.0</junit-jupiter.version>
+		<junit-jupiter.version>5.7.1</junit-jupiter.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
 	</properties>
@@ -54,7 +54,7 @@
 		<repository>
 			<id>Eclipse</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/2020-12</url>
+			<url>http://download.eclipse.org/releases/2021-03</url>
 		</repository>
 		<repository>
 			<id>Vitruv License</id>
@@ -517,7 +517,7 @@
 								<repository>
 									<id>Eclipse</id>
 									<layout>p2</layout>
-									<url>http://download.eclipse.org/releases/2020-12</url>
+									<url>http://download.eclipse.org/releases/2021-03</url>
 								</repository>
 								<repository>
 									<id>Eclipse CBI Aggregator</id>
