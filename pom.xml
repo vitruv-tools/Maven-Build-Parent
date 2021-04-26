@@ -48,13 +48,14 @@
 		<junit-jupiter.version>5.7.1</junit-jupiter.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
+		<eclipse.updatesite>http://download.eclipse.org/releases/2021-03</eclipse.updatesite>
 	</properties>
 
 	<repositories>
 		<repository>
 			<id>Eclipse</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/2021-03</url>
+			<url>${eclipse.updatesite}</url>
 		</repository>
 		<repository>
 			<id>Vitruv License</id>
@@ -517,7 +518,7 @@
 								<repository>
 									<id>Eclipse</id>
 									<layout>p2</layout>
-									<url>http://download.eclipse.org/releases/2021-03</url>
+									<url>${eclipse.updatesite}</url>
 								</repository>
 								<repository>
 									<id>Eclipse CBI Aggregator</id>
