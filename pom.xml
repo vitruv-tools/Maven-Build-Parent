@@ -223,6 +223,7 @@
 						<redirectTestOutputToFile>true</redirectTestOutputToFile>
 						<!-- We do not (need to) mark the source folder in eclipse-test-plugins as a test source folder, so classes are compiled into the ordinary output directory -->
 						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
+						<trimStackTrace>false</trimStackTrace>
 					</configuration>
 				</plugin>
 
@@ -233,6 +234,7 @@
 					<version>${tycho.version}</version>
 					<configuration>
 						<failIfNoTests>true</failIfNoTests>
+						<trimStackTrace>false</trimStackTrace>
 					</configuration>
 				</plugin>
 
