@@ -17,6 +17,10 @@ In addition, some needs to be run in a full Eclipse workbench, i.e., with UI har
 
 For building aggregated updatesites with the CBI aggregator, the aggregator file named `updatesite.aggr` has to be placed within the project's main folder to enable building the updatesite.
 
+### MWE2 Workflows
+
+The POM preconfigures the automatic execution of MWE2 workflow executions placed in projects under `workflow/clean.mwe2` for cleanup purposes and under `workflow/generate.mwe2` for generation purposes. The Maven build automatically replaces the variable `workspaceRoot` with the proper path to the workspace root during the build process. So every `mwe2` file should use that variable to define the workspace root for execution within Eclipse (usually relative to the project folder) to be then automatically adjusted during a Maven build.
+
 ## Deployment
 
 ### Automatic
