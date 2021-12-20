@@ -36,7 +36,7 @@
 	<properties>
 		<mwe.version>1.6.1</mwe.version>
 		<mwe2.version>2.12.1</mwe2.version>
-		<tycho.version>2.3.0</tycho.version>
+		<tycho.version>2.5.0</tycho.version>
 		<xtext.version>2.25.0</xtext.version>
 		<emf-codegen.version>2.22.0</emf-codegen.version>
 		<ecore-codegen.version>2.26.0</ecore-codegen.version>
@@ -219,7 +219,6 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven-surefire.version}</version>
 					<configuration>
-						<failIfNoTests>true</failIfNoTests>
 						<redirectTestOutputToFile>true</redirectTestOutputToFile>
 						<!-- We do not (need to) mark the source folder in eclipse-test-plugins as a test source folder, so classes are compiled into the ordinary output directory -->
 						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
