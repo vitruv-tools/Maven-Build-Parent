@@ -60,7 +60,7 @@
 		<repository>
 			<id>Vitruv License</id>
 			<layout>p2</layout>
-			<url>http://vitruv-tools.github.io/updatesite/release/license</url>
+			<url>https://vitruv-tools.github.io/updatesite/release/license</url>
 		</repository>
 	</repositories>
 
