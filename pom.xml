@@ -136,8 +136,7 @@
 							<trimTrailingWhitespace></trimTrailingWhitespace>
 							<endWithNewline></endWithNewline>
 							<indent>
-								<spaces>true</spaces>
-								<spacesPerTab>4</spacesPerTab>
+								<tabs>true</tabs>
 							</indent>
 						</format>
 					</formats>
@@ -147,7 +146,7 @@
 							<encoding>UTF-8</encoding>
 							<keepBlankLines>true</keepBlankLines>
 							<indentBlankLines>false</indentBlankLines>
-							<nrOfIndentSpace>4</nrOfIndentSpace>
+							<nrOfIndentSpace>-1</nrOfIndentSpace> <!-- use tabs -->
 						</sortPom>
 					</pom>
 				</configuration>
