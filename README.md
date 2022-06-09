@@ -25,7 +25,7 @@ The POM preconfigures the automatic execution of MWE2 workflow executions placed
 
 ### Automatic
 
-Deployment is automatically performed by GitHub Actions. Snapshot versions committed to the `master` branch are deployed to the Sonatype Snapshots repository. Commits with release versions that are also tagged as a release are deployed to the Sonatype Release repository.
+Deployment is automatically performed by GitHub Actions. Snapshot versions committed to the `master` branch are deployed to the Sonatype Snapshots repository. For release versions, the according commit should be tagged with the version number and a [GitHub release](https://github.com/vitruv-tools/Maven-Build-Parent/releases) should be created which will get deployed to the Sonatype Release repository.
 
 Both the Sonatype user and the GPG key used for signing are provided by secrets of the GitHub repository.
 
