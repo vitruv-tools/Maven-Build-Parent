@@ -49,6 +49,7 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
 		<eclipse.updatesite>https://download.eclipse.org/releases/2021-12</eclipse.updatesite>
+		<macos-jvm-swt-flags/> <!-- flag for SWT workaround on macOS -->
 	</properties>
 
 	<repositories>
@@ -626,10 +627,24 @@
 						<configuration>
 							<useUIHarness>true</useUIHarness>
 							<useUIThread>false</useUIThread>
+							<argLine>${macos-jvm-swt-flags}</argLine>
 						</configuration>
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+
+		<!-- macOS requires UI work to be executed on the main thread only -->
+		<profile>
+			<id>macos-jvm-swt-flags</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<properties>
+				<macos-jvm-swt-flags>-XstartOnFirstThread</macos-jvm-swt-flags>
+			</properties>
 		</profile>
 	</profiles>
 </project>
