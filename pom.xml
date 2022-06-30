@@ -30,7 +30,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/vitruv-tools/Maven-Build-Parent.git</connection>
 		<developerConnection>scm:git:ssh://github.com/vitruv-tools/Maven-Build-Parent.git</developerConnection>
-		<url>http://github.com/vitruv-tools/Maven-Build-Parent/tree/master</url>
+		<url>http://github.com/vitruv-tools/Maven-Build-Parent/tree/main</url>
 	</scm>
 
 	<properties>
