@@ -1,9 +1,0 @@
-name: Major Update
-description: Contribution requires a new major version release
-labels: "major"
-body:
-  - type: markdown
-    attributes:
-      value: |
-        Pull requests regarding major updates need to target the `develop` branch.
-        Please make sure to select the appropriate branch while creating the pull request.
