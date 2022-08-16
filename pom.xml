@@ -65,6 +65,13 @@
 		</repository>
 	</repositories>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<!-- Tycho target platform -->
@@ -102,8 +109,8 @@
 
 			<!-- Tests -->
 			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-surefire-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 		</plugins>
 
@@ -219,6 +226,15 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>${maven-surefire.version}</version>
+					<executions>
+						<execution>
+							<id>test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>test</goal>
+							</goals>
+						</execution>
+					</executions>
 					<configuration>
 						<redirectTestOutputToFile>true</redirectTestOutputToFile>
 						<!-- We do not (need to) mark the source folder in eclipse-test-plugins as a test source folder, so classes are compiled into the ordinary output directory -->
@@ -227,11 +243,17 @@
 					</configuration>
 				</plugin>
 
-				<!-- Run tests with Tycho surefire -->
+				<!-- Do not run tests with Tycho surefire by default-->
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-surefire-plugin</artifactId>
 					<version>${tycho.version}</version>
+					<executions>
+						<execution>
+							<id>default-test</id>
+							<phase>none</phase>
+						</execution>
+					</executions>
 					<configuration>
 						<failIfNoTests>true</failIfNoTests>
 						<trimStackTrace>false</trimStackTrace>
@@ -568,20 +590,14 @@
 			</build>
 		</profile>
 
-		<!-- Uses maven-surefire instead of tycho-surefire to run tests that do not require an Equinox platform -->
+		<!-- Run tests with tycho-surefire if marker file is present -->
 		<profile>
-			<id>standalone-test</id>
+			<id>platform-test</id>
 			<activation>
 				<file>
-					<exists>.tests-without-platform</exists>
+					<exists>.tests-need-platform</exists>
 				</file>
 			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>org.junit.jupiter</groupId>
-					<artifactId>junit-jupiter-engine</artifactId>
-				</dependency>
-			</dependencies>
 			<build>
 				<plugins>
 					<plugin>
@@ -590,7 +606,7 @@
 						<executions>
 							<execution>
 								<id>default-test</id>
-								<phase>none</phase>
+								<phase>integration-test</phase>
 							</execution>
 						</executions>
 					</plugin>
@@ -600,10 +616,7 @@
 						<executions>
 							<execution>
 								<id>test</id>
-								<phase>test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
+								<phase>none</phase>
 							</execution>
 						</executions>
 					</plugin>
@@ -611,7 +624,7 @@
 			</build>
 		</profile>
 
-		<!-- Configure tycho-surefire to run tests in a full Eclipse workbench with UI -->
+		<!-- Run test with tycho-surefire in a full Eclipse workbench with UI if marker file is present -->
 		<profile>
 			<id>workbench-test</id>
 			<activation>
@@ -624,11 +637,27 @@
 					<plugin>
 						<groupId>org.eclipse.tycho</groupId>
 						<artifactId>tycho-surefire-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default-test</id>
+								<phase>integration-test</phase>
+							</execution>
+						</executions>
 						<configuration>
 							<useUIHarness>true</useUIHarness>
 							<useUIThread>false</useUIThread>
 							<argLine>${macos-jvm-swt-flags}</argLine>
 						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>test</id>
+								<phase>none</phase>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
