@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>tools.vitruv</groupId>
 	<artifactId>parent</artifactId>
-	<version>1.4.1</version>
+	<version>2.0.0</version>
 	<name>${project.artifactId}</name>
 	<description>A common parent POM for all builds of vitruv.tools</description>
 	<url>http://vitruv.tools</url>
@@ -30,26 +30,29 @@
 	<scm>
 		<connection>scm:git:git://github.com/vitruv-tools/Maven-Build-Parent.git</connection>
 		<developerConnection>scm:git:ssh://github.com/vitruv-tools/Maven-Build-Parent.git</developerConnection>
-		<url>http://github.com/vitruv-tools/Maven-Build-Parent/tree/master</url>
+		<url>https://github.com/vitruv-tools/Maven-Build-Parent</url>
 	</scm>
 
 	<properties>
-		<mwe.version>1.6.1</mwe.version>
-		<mwe2.version>2.12.1</mwe2.version>
-		<tycho.version>2.5.0</tycho.version>
-		<xtext.version>2.25.0</xtext.version>
-		<emf-codegen.version>2.22.0</emf-codegen.version>
-		<ecore-codegen.version>2.26.0</ecore-codegen.version>
-		<maven-clean.version>3.1.0</maven-clean.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven-compiler.version>3.8.1</maven-compiler.version>
-		<maven-surefire.version>2.22.2</maven-surefire.version>
-		<junit-jupiter.version>5.8.2</junit-jupiter.version>
+		<eclipse.updatesite>https://download.eclipse.org/releases/2022-06</eclipse.updatesite>
+		<exec-maven-plugin.version>3.1.0</exec-maven-plugin.version> <!-- https://search.maven.org/artifact/org.codehaus.mojo/exec-maven-plugin/ -->
+		<junit-jupiter.version>5.9.0</junit-jupiter.version> <!-- https://search.maven.org/artifact/org.junit.jupiter/junit-jupiter -->
+		<maven-clean-plugin.version>3.2.0</maven-clean-plugin.version> <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-clean-plugin -->
+		<maven-compiler.version>3.10.1</maven-compiler.version> <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version> <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
+		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version> <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version> <!-- https://search.maven.org/artifact/org.sonatype.plugins/nexus-staging-maven-plugin -->
+		<org.eclipse.emf.codegen.version>2.22.0</org.eclipse.emf.codegen.version> <!-- https://search.maven.org/artifact/org.eclipse.emf/org.eclipse.emf.codegen -->
+		<org.eclipse.emf.codegen.ecore.version>2.30.0</org.eclipse.emf.codegen.ecore.version> <!-- https://search.maven.org/artifact/org.eclipse.emf/org.eclipse.emf.codegen.ecore -->
+		<org.eclipse.emf.mwe.utils.version>1.7.0</org.eclipse.emf.mwe.utils.version><!-- https://search.maven.org/artifact/org.eclipse.emf/org.eclipse.emf.mwe.utils -->
+		<org.eclipse.emf.mwe2.version>2.13.0</org.eclipse.emf.mwe2.version> <!-- https://search.maven.org/artifact/org.eclipse.emf/org.eclipse.emf.mwe2.lib -->
+		<tycho.version>2.7.4</tycho.version> <!-- https://search.maven.org/artifact/org.eclipse.tycho/tycho-maven-plugin -->
+		<xtext.version>2.27.0</xtext.version> <!-- https://search.maven.org/artifact/org.eclipse.xtext/org.eclipse.xtext.common.types -->
+		<macos-jvm-swt-flags/> <!-- flag for SWT workaround on macOS -->
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
-		<eclipse.updatesite>https://download.eclipse.org/releases/2021-12</eclipse.updatesite>
-		<macos-jvm-swt-flags/> <!-- flag for SWT workaround on macOS -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<repositories>
@@ -64,6 +67,14 @@
 			<url>https://vitruv-tools.github.io/updatesite/release/license</url>
 		</repository>
 	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit-jupiter.version}</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -102,8 +113,8 @@
 
 			<!-- Tests -->
 			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-surefire-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 		</plugins>
 
@@ -148,7 +159,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
-					<version>${maven-clean.version}</version>
+					<version>${maven-clean-plugin.version}</version>
 					<executions>
 						<execution>
 							<id>gen-clean</id>
@@ -171,12 +182,12 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
-					<version>3.0.0</version>
+					<version>${exec-maven-plugin.version}</version>
 					<dependencies>
 						<dependency>
 							<groupId>org.eclipse.emf</groupId>
 							<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
-							<version>${mwe2.version}</version>
+							<version>${org.eclipse.emf.mwe2.version}</version>
 						</dependency>
 						<dependency>
 							<groupId>org.eclipse.xtext</groupId>
@@ -218,7 +229,16 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>${maven-surefire.version}</version>
+					<version>${maven-surefire-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>test</goal>
+							</goals>
+						</execution>
+					</executions>
 					<configuration>
 						<redirectTestOutputToFile>true</redirectTestOutputToFile>
 						<!-- We do not (need to) mark the source folder in eclipse-test-plugins as a test source folder, so classes are compiled into the ordinary output directory -->
@@ -227,11 +247,17 @@
 					</configuration>
 				</plugin>
 
-				<!-- Run tests with Tycho surefire -->
+				<!-- Do not run tests with Tycho surefire by default-->
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-surefire-plugin</artifactId>
 					<version>${tycho.version}</version>
+					<executions>
+						<execution>
+							<id>default-test</id>
+							<phase>none</phase>
+						</execution>
+					</executions>
 					<configuration>
 						<failIfNoTests>true</failIfNoTests>
 						<trimStackTrace>false</trimStackTrace>
@@ -278,16 +304,6 @@
 		</pluginManagement>
 	</build>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.junit.jupiter</groupId>
-				<artifactId>junit-jupiter-engine</artifactId>
-				<version>${junit-jupiter.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
 	<profiles>
 		<!-- Build configuration of parent POM itself -->
 		<profile>
@@ -312,7 +328,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.6</version>
+						<version>${maven-gpg-plugin.version}</version>
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
@@ -347,7 +363,7 @@
 					<plugin>
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.8</version>
+						<version>${nexus-staging-maven-plugin.version}</version>
 						<extensions>true</extensions>
 						<configuration>
 							<serverId>ossrh</serverId>
@@ -397,7 +413,7 @@
 							<dependency>
 								<groupId>org.eclipse.emf</groupId>
 								<artifactId>org.eclipse.emf.mwe.utils</artifactId>
-								<version>${mwe.version}</version>
+								<version>${org.eclipse.emf.mwe.utils.version}</version>
 							</dependency>
 						</dependencies>
 					</plugin>
@@ -451,22 +467,22 @@
 							<dependency>
 								<groupId>org.eclipse.emf</groupId>
 								<artifactId>org.eclipse.emf.mwe2.lib</artifactId>
-								<version>${mwe2.version}</version>
+								<version>${org.eclipse.emf.mwe2.version}</version>
 							</dependency>
 							<dependency>
 								<groupId>org.eclipse.emf</groupId>
 								<artifactId>org.eclipse.emf.codegen</artifactId>
-								<version>${emf-codegen.version}</version>
+								<version>${org.eclipse.emf.codegen.version}</version>
 							</dependency>
 							<dependency>
 								<groupId>org.eclipse.emf</groupId>
 								<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
-								<version>${ecore-codegen.version}</version>
+								<version>${org.eclipse.emf.codegen.ecore.version}</version>
 							</dependency>
 							<dependency>
 								<groupId>org.eclipse.emf</groupId>
 								<artifactId>org.eclipse.emf.mwe.utils</artifactId>
-								<version>${mwe.version}</version>
+								<version>${org.eclipse.emf.mwe.utils.version}</version>
 							</dependency>
 						</dependencies>
 					</plugin>
@@ -480,138 +496,7 @@
 			</build>
 		</profile>
 
-		<!-- Builds the aggregated updatesite "updatesite.aggr", if existing, with the CBI aggregator -->
-		<profile>
-			<id>aggregated-updatesite</id>
-			<activation>
-				<file>
-					<exists>updatesite.aggr</exists>
-				</file>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-clean-plugin</artifactId>
-						<version>${maven-clean.version}</version>
-						<executions>
-							<execution>
-								<id>workspace-clean</id>
-								<phase>clean</phase>
-								<goals>
-									<goal>clean</goal>
-								</goals>
-								<configuration>
-									<filesets>
-										<fileset>
-											<directory>workspace</directory>
-										</fileset>
-									</filesets>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.eclipse.tycho.extras</groupId>
-						<artifactId>tycho-eclipserun-plugin</artifactId>
-						<version>${tycho.version}</version>
-						<configuration>
-							<repositories>
-								<repository>
-									<id>Eclipse</id>
-									<layout>p2</layout>
-									<url>${eclipse.updatesite}</url>
-								</repository>
-								<repository>
-									<id>Eclipse CBI Aggregator</id>
-									<layout>p2</layout>
-									<url>http://download.eclipse.org/cbi/updates/aggregator/ide/4.13/</url>
-								</repository>
-							</repositories>
-							<jvmArgs>
-								<args>-Xmx1024m</args>
-							</jvmArgs>
-							<applicationsArgs>
-								<args>-application</args>
-								<args>org.eclipse.cbi.p2repo.cli.headless</args>
-								<args>aggregate</args>
-								<args>--buildModel</args>
-								<args>updatesite.aggr</args>
-								<args>--action</args>
-								<args>BUILD</args>
-							</applicationsArgs>
-							<dependencies>
-								<dependency>
-									<artifactId>org.eclipse.equinox.p2.core.feature</artifactId>
-									<type>eclipse-feature</type>
-								</dependency>
-								<dependency>
-									<artifactId>org.eclipse.e4.rcp</artifactId>
-									<type>eclipse-feature</type>
-								</dependency>
-								<dependency>
-									<artifactId>org.eclipse.cbi.p2repo.aggregator.editor.feature</artifactId>
-									<type>eclipse-feature</type>
-								</dependency>
-							</dependencies>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>eclipse-run</goal>
-								</goals>
-								<phase>package</phase>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- Uses maven-surefire instead of tycho-surefire to run tests that do not require an Equinox platform -->
-		<profile>
-			<id>standalone-test</id>
-			<activation>
-				<file>
-					<exists>.tests-without-platform</exists>
-				</file>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>org.junit.jupiter</groupId>
-					<artifactId>junit-jupiter-engine</artifactId>
-				</dependency>
-			</dependencies>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>default-test</id>
-								<phase>none</phase>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>test</id>
-								<phase>test</phase>
-								<goals>
-									<goal>test</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- Configure tycho-surefire to run tests in a full Eclipse workbench with UI -->
+		<!-- Run test with tycho-surefire in a full Eclipse workbench with UI if marker file is present -->
 		<profile>
 			<id>workbench-test</id>
 			<activation>
@@ -624,11 +509,27 @@
 					<plugin>
 						<groupId>org.eclipse.tycho</groupId>
 						<artifactId>tycho-surefire-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default-test</id>
+								<phase>integration-test</phase>
+							</execution>
+						</executions>
 						<configuration>
 							<useUIHarness>true</useUIHarness>
 							<useUIThread>false</useUIThread>
 							<argLine>${macos-jvm-swt-flags}</argLine>
 						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>test</id>
+								<phase>none</phase>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>

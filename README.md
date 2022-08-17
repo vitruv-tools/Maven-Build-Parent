@@ -8,14 +8,8 @@ The POM enables all compiler, tycho, packaging, feature, test, bundles and Xtend
 
 ### Test Projects
 
-Projects ending with `.tests` are automatically interpreted as plugin test projects by Maven. By default, they set up an Eclipse/Equinox platform to run the tests on.
-If the test can be run without such a platform, it improves performance when running them as ordinary JUnit test. To do so, the POM provides a profile that can be activated for a project by placing the marker file `.tests-without-platform` in the project's root folder.
-In addition, some needs to be run in a full Eclipse workbench, i.e., with UI harness. To do so, the POM provides a profile that can be activated for a a project by placing the marker file `.tests-need-workbench` in the project's root folder.
-.tests-without-platform
-
-### Aggregated Updatesites
-
-For building aggregated updatesites with the CBI aggregator, the aggregator file named `updatesite.aggr` has to be placed within the project's main folder to enable building the updatesite.
+Projects ending with `.tests` are automatically interpreted as plugin test projects by Maven. The provided POM defines that these tests are executed as pure Jave tests (using the `maven-surefire-plugin` by default.
+For cases in which tests need to be run in a full Eclipse workbench based on an Equinox environment, the `tycho-surefire-plugin` with UI harness has to used. To do so, the POM provides a profile that can be activated for a project by placing the marker file `.tests-need-workbench` in the project's root folder.
 
 ### MWE2 Workflows
 
@@ -25,7 +19,7 @@ The POM preconfigures the automatic execution of MWE2 workflow executions placed
 
 ### Automatic
 
-Deployment is automatically performed by GitHub Actions. Snapshot versions committed to the `master` branch are deployed to the Sonatype Snapshots repository. Commits with release versions that are also tagged as a release are deployed to the Sonatype Release repository.
+Deployment is automatically performed by GitHub Actions. Snapshot versions committed to the `develop` branch are deployed to the Sonatype Snapshots repository. For release versions, the according commit on the `main` branch has to be tagged with the version number and a [GitHub release](https://github.com/vitruv-tools/Maven-Build-Parent/releases) has to be created, which triggers deployment to the Sonatype Release repository.
 
 Both the Sonatype user and the GPG key used for signing are provided by secrets of the GitHub repository.
 
