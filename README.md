@@ -8,14 +8,8 @@ The POM enables all compiler, tycho, packaging, feature, test, bundles and Xtend
 
 ### Test Projects
 
-Projects ending with `.tests` are automatically interpreted as plugin test projects by Maven. By default, they set up an Eclipse/Equinox platform to run the tests on.
-If the test can be run without such a platform, it improves performance when running them as ordinary JUnit test. To do so, the POM provides a profile that can be activated for a project by placing the marker file `.tests-without-platform` in the project's root folder.
-In addition, some needs to be run in a full Eclipse workbench, i.e., with UI harness. To do so, the POM provides a profile that can be activated for a a project by placing the marker file `.tests-need-workbench` in the project's root folder.
-.tests-without-platform
-
-### Aggregated Updatesites
-
-For building aggregated updatesites with the CBI aggregator, the aggregator file named `updatesite.aggr` has to be placed within the project's main folder to enable building the updatesite.
+Projects ending with `.tests` are automatically interpreted as plugin test projects by Maven. The provided POM defines that these tests are executed as pure Jave tests (using the `maven-surefire-plugin` by default.
+For cases in which tests need to be run in a full Eclipse workbench based on an Equinox environment, the `tycho-surefire-plugin` with UI harness has to used. To do so, the POM provides a profile that can be activated for a project by placing the marker file `.tests-need-workbench` in the project's root folder.
 
 ### MWE2 Workflows
 
