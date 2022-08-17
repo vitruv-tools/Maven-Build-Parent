@@ -493,40 +493,6 @@
 			</build>
 		</profile>
 
-		<!-- Run tests with tycho-surefire if marker file is present -->
-		<profile>
-			<id>platform-test</id>
-			<activation>
-				<file>
-					<exists>.tests-need-platform</exists>
-				</file>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>default-test</id>
-								<phase>integration-test</phase>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>test</id>
-								<phase>none</phase>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
 		<!-- Run test with tycho-surefire in a full Eclipse workbench with UI if marker file is present -->
 		<profile>
 			<id>workbench-test</id>

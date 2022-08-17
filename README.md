@@ -9,8 +9,7 @@ The POM enables all compiler, tycho, packaging, feature, test, bundles and Xtend
 ### Test Projects
 
 Projects ending with `.tests` are automatically interpreted as plugin test projects by Maven. The provided POM defines that these tests are executed as pure Jave tests (using the `maven-surefire-plugin` by default.
-For cases in which the test shall or need to be run with an Eclipse/Equinox platform, i.e., using the `tycho-surefire-plugin`, the POM provides a profile that can be activated for a project by placing the marker file `.tests-need-platform` in the project's root folder.
-In addition, some needs to be run in a full Eclipse workbench, i.e., with UI harness. To do so, the POM provides a profile that can be activated for a a project by placing the marker file `.tests-need-workbench` in the project's root folder.
+For cases in which tests need to be run in a full Eclipse workbench based on an Equinox environment, the `tycho-surefire-plugin` with UI harness has to used. To do so, the POM provides a profile that can be activated for a project by placing the marker file `.tests-need-workbench` in the project's root folder.
 
 ### MWE2 Workflows
 
