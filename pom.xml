@@ -69,6 +69,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit-jupiter.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -299,16 +300,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.junit.jupiter</groupId>
-				<artifactId>junit-jupiter-engine</artifactId>
-				<version>${junit-jupiter.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<profiles>
 		<!-- Build configuration of parent POM itself -->
