@@ -46,7 +46,6 @@
 		<maven-compiler.version>3.8.1</maven-compiler.version>
 		<maven-surefire.version>2.22.2</maven-surefire.version>
 		<junit-jupiter.version>5.8.2</junit-jupiter.version>
-		<spotless.version>2.22.5</spotless.version>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
 		<eclipse.updatesite>https://download.eclipse.org/releases/2021-12</eclipse.updatesite>
@@ -105,52 +104,6 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
-			</plugin>
-
-			<!-- Code Style -->
-			<plugin>
-				<groupId>com.diffplug.spotless</groupId>
-				<artifactId>spotless-maven-plugin</artifactId>
-				<version>${spotless.version}</version>
-				<configuration>
-					<java>
-						<includes>
-							<include>*.java</include>
-						</includes>
-
-						<eclipse>
-							<file>formatter.xml</file>
-						</eclipse>
-						<importOrder>
-							<file>spotless.importorder</file>
-						</importOrder>
-						<removeUnusedImports></removeUnusedImports>
-					</java>
-
-					<formats>
-						<format>
-							<!-- custom format for Xtend and our own languages -->
-							<includes>
-								<include>*.xtend</include>
-								<include>*.reactions</include>
-							</includes>
-							<trimTrailingWhitespace></trimTrailingWhitespace>
-							<endWithNewline></endWithNewline>
-							<indent>
-								<tabs>true</tabs>
-							</indent>
-						</format>
-					</formats>
-
-					<pom>
-						<sortPom>
-							<encoding>UTF-8</encoding>
-							<keepBlankLines>true</keepBlankLines>
-							<indentBlankLines>false</indentBlankLines>
-							<nrOfIndentSpace>-1</nrOfIndentSpace> <!-- use tabs -->
-						</sortPom>
-					</pom>
-				</configuration>
 			</plugin>
 		</plugins>
 
