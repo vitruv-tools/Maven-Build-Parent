@@ -36,7 +36,7 @@
 	<properties>
 		<eclipse.updatesite>https://download.eclipse.org/releases/2022-06</eclipse.updatesite>
 		<exec-maven-plugin.version>3.1.0</exec-maven-plugin.version> <!-- https://search.maven.org/artifact/org.codehaus.mojo/exec-maven-plugin/ -->
-		<junit-jupiter.version>5.9.0</junit-jupiter.version> <!-- https://search.maven.org/artifact/org.junit.jupiter/junit-jupiter -->
+		<junit-jupiter.version>5.8.1</junit-jupiter.version> <!-- https://search.maven.org/artifact/org.junit.jupiter/junit-jupiter -->
 		<maven-clean-plugin.version>3.2.0</maven-clean-plugin.version> <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-clean-plugin -->
 		<maven-compiler.version>3.10.1</maven-compiler.version> <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
 		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version> <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
