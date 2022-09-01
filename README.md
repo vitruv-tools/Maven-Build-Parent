@@ -1,4 +1,9 @@
 # Vitruv-Maven-Build-Parent
+[![GitHub Action CI](https://github.com/vitruv-tools/Maven-Build-Parent/workflows/CI/badge.svg)](https://github.com/vitruv-tools/Maven-Build-Parent/actions?query=workflow%3ACI)
+[![Latest Release](https://img.shields.io/github/release/vitruv-tools/Maven-Build-Parent.svg)](https://github.com/vitruv-tools/Maven-Build-Parent/releases/latest)
+[![Issues](https://img.shields.io/github/issues/vitruv-tools/Maven-Build-Parent.svg)](https://github.com/vitruv-tools/Maven-Build-Parent/issues)
+[![License](https://img.shields.io/github/license/vitruv-tools/Maven-Build-Parent.svg)](https://raw.githubusercontent.com/vitruv-tools/Maven-Build-Parent/main/LICENSE)
+
 A Maven parent specification for all Vitruv-related projects.
 It defines default plugin configurations for running the Maven compiler, running Tycho, generating sources, packaging bundles and features, and running tests and for running Xtend.
 
