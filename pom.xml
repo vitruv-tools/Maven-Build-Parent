@@ -50,8 +50,7 @@
 		<tycho.version>3.0.0</tycho.version> <!-- https://search.maven.org/artifact/org.eclipse.tycho/tycho-maven-plugin -->
 		<xtext.version>2.29.0</xtext.version> <!-- https://search.maven.org/artifact/org.eclipse.xtext/org.eclipse.xtext.common.types -->
 		<macos-jvm-swt-flags/> <!-- flag for SWT workaround on macOS -->
-		<maven.compiler.target>17</maven.compiler.target>
-		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.release>17</maven.compiler.release>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
