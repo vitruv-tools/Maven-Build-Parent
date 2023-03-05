@@ -34,7 +34,7 @@
 	</scm>
 
 	<properties>
-		<eclipse.version>2022-12</eclipse.version>
+		<eclipse.version>2023-03</eclipse.version>
 		<eclipse.updatesite>https://download.eclipse.org/releases/${eclipse.version}</eclipse.updatesite>
 		<exec-maven-plugin.version>3.1.0</exec-maven-plugin.version> <!-- https://central.sonatype.com/artifact/org.codehaus.mojo/exec-maven-plugin/3.1.0 -->
 		<junit-jupiter.version>5.9.2</junit-jupiter.version> <!-- https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter/5.9.2 -->
