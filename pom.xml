@@ -47,7 +47,7 @@
 		<org.eclipse.emf.codegen.ecore.version>2.33.0</org.eclipse.emf.codegen.ecore.version> <!-- https://central.sonatype.com/artifact/org.eclipse.emf/org.eclipse.emf.codegen.ecore/2.33.0 -->
 		<org.eclipse.emf.mwe.utils.version>1.8.0</org.eclipse.emf.mwe.utils.version> <!-- https://central.sonatype.com/artifact/org.eclipse.emf/org.eclipse.emf.mwe.utils/1.8.0 -->
 		<org.eclipse.emf.mwe2.version>2.14.0</org.eclipse.emf.mwe2.version> <!-- https://central.sonatype.com/artifact/org.eclipse.emf/org.eclipse.emf.mwe2.lib/2.14.0 -->
-		<tycho.version>3.0.4</tycho.version> <!-- https://central.sonatype.com/artifact/org.eclipse.tycho/tycho-maven-plugin/3.0.4 -->
+		<tycho.version>4.0.3</tycho.version> <!-- https://central.sonatype.com/artifact/org.eclipse.tycho/tycho-maven-plugin/4.0.2 -->
 		<xtext.version>2.30.0</xtext.version> <!-- https://central.sonatype.com/artifact/org.eclipse.xtext/org.eclipse.xtext.common.types/2.30.0 -->
 		<sdq.commons.version>2.2.0</sdq.commons.version> <!-- https://github.com/kit-sdq/SDQ-Commons -->
 		<sdq.xannotations.version>1.6.0</sdq.xannotations.version> <!-- https://github.com/kit-sdq/XAnnotations -->
