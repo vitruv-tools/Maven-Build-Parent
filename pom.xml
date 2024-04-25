@@ -51,7 +51,7 @@
 		<xtext.version>2.30.0</xtext.version> <!-- https://central.sonatype.com/artifact/org.eclipse.xtext/org.eclipse.xtext.common.types/2.30.0 -->
 		<sdq.commons.version>2.2.0</sdq.commons.version> <!-- https://github.com/kit-sdq/SDQ-Commons -->
 		<sdq.xannotations.version>1.6.0</sdq.xannotations.version> <!-- https://github.com/kit-sdq/XAnnotations -->
-		<sdq.demometamodels.version>1.7.0</sdq.demometamodels.version> <!-- https://github.com/kit-sdq/DemoMetamodels -->
+		<sdq.demometamodels.version>1.9.0</sdq.demometamodels.version> <!-- https://github.com/kit-sdq/DemoMetamodels -->
 		<macos-jvm-swt-flags/> <!-- flag for SWT workaround on macOS -->
 		<maven.compiler.release>17</maven.compiler.release>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
