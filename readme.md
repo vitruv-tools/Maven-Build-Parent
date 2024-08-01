@@ -89,7 +89,7 @@ pom.xml
 
 ### Generated Directories and Files
 
-Generated directories and files should not be touched or committed.
+Generated directories and files should in general not be modified or committed, unless specified otherwise in the following list.
 
 - `META-INF/` contains Eclipse-specific project information
 - `target/` contains Maven build results
