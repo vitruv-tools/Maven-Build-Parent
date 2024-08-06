@@ -56,7 +56,14 @@ Remember to replace `x.y.z` with the actual version you want to reference.
 ### `maven-jar-plugin`
 
 - packages the build results in a jar archive
-- should be disable for test-only projects by setting an empty `phase` for the execution `default-jar`
+- should be disabled for test-only projects by setting an empty `phase` for the execution `default-jar`
+- when packaging Ecore meta-models, the `MANIFEST.MF` file needs to be added to the jar, which is achieved by adding the following code to the plugin configuration
+
+```
+<archive>
+    <manifestFile>${project.basedir}/META-INF/MANIFEST.MF</manifestFile>
+</archive>
+```
 
 ### `maven-install-plugin`
 
@@ -86,6 +93,19 @@ workflow/
 plugin.xml
 pom.xml
 ```
+
+### Working with Ecore Meta-Models
+
+Working with `.ecore` and `.genmodel` requires the correct Maven plugins and specific files in your project as described previously.
+In addition, changes to the files can be necessary, described in the following.
+
+For `.genmodel` files:
+- change all URIs in `usedGenPackages` from local URIs to `platform:/resource/` URIs
+- change the `modelDirectory` to `/<plugin-id>/target/generated-sources/ecore`
+
+For `.ecore` files:
+- change local URIs to external meta-models (like `../../org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier`) to NS URIs (like `http://www.eclipse.org/emf/2002/Ecore#//EClassifier`)
+- to reference meta-models from other Vitruvius projects, use platform URIs of the form `platform:/resource/<plugin-id>/src/main/ecore/<meta-model>.genmodel`
 
 ### Generated Directories and Files
 
