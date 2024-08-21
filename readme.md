@@ -102,6 +102,7 @@ In addition, changes to the files can be necessary, described in the following.
 For `.genmodel` files:
 - change all URIs in `usedGenPackages` from local URIs to `platform:/resource/` URIs
 - change the `modelDirectory` to `/<plugin-id>/target/generated-sources/ecore`
+- check that the `genmodel:GenModel` tag contains the attribute `modelPluginID`
 
 For `.ecore` files:
 - change local URIs to external meta-models (like `../../org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier`) to NS URIs (like `http://www.eclipse.org/emf/2002/Ecore#//EClassifier`)

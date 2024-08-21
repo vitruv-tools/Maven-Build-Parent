@@ -37,13 +37,21 @@
 
   <build>
     <resources>
-      <!-- add Eclipse-specific files to build artifact -->
+      <!-- add Ecore files to build artifact -->
       <resource>
         <directory>${project.basedir}</directory>
         <includes>
           <include>src/main/ecore/**/*</include>
           <include>plugin.properties</include>
           <include>plugin.xml</include>
+        </includes>
+      </resource>
+      <!-- add Xtext files to build artifact -->
+      <resource>
+        <directory>${project.build.directory}/generated-sources/xtext-java</directory>
+        <includes>
+          <include>**/*.xtextbin</include>
+          <include>**/*.xmi</include>
         </includes>
       </resource>
     </resources>
@@ -79,8 +87,11 @@
               <configuration>
                 <sources>
                   <source>${project.basedir}/src/main/xtend</source>
+                  <source>${project.basedir}/src/main/xtext</source>
                   <source>${project.build.directory}/generated-sources/ecore</source>
                   <source>${project.build.directory}/generated-sources/xtend</source>
+                  <source>${project.build.directory}/generated-sources/xtext-ecore</source>
+                  <source>${project.build.directory}/generated-sources/xtext-java</source>
                 </sources>
               </configuration>
             </execution>
@@ -95,7 +106,27 @@
                 <sources>
                   <source>${project.basedir}/src/test/xtend</source>
                   <source>${project.build.directory}/generated-test-sources/xtend</source>
+                  <source>${project.build.directory}/generated-test-sources/xtext-java</source>
                 </sources>
+              </configuration>
+            </execution>
+            <!-- add generated Xtext resources to the classpath -->
+            <execution>
+              <id>add-test-resource</id>
+              <phase>generate-test-resources</phase>
+              <goals>
+                <goal>add-test-resource</goal>
+              </goals>
+              <configuration>
+                <resources>
+                  <resource>
+                    <directory>${project.build.directory}/generated-sources/xtext-java</directory>
+                    <includes>
+                      <include>**/*.xtextbin</include>
+                      <include>**/*.xmi</include>
+                    </includes>
+                  </resource>
+                </resources>
               </configuration>
             </execution>
           </executions>
@@ -106,7 +137,7 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>3.1.0</version>
           <executions>
-            <!-- generate code from Ecore meta-models -->
+            <!-- generate code from Ecore meta-models and Xtext grammars -->
             <execution>
               <id>execute-mwe2-generate</id>
               <phase>generate-sources</phase>
@@ -131,27 +162,32 @@
             <dependency>
               <groupId>org.eclipse.emf</groupId>
               <artifactId>org.eclipse.emf.codegen.ecore</artifactId>
-              <version>2.34.0</version>
+              <version>2.38.0</version>
             </dependency>
             <dependency>
               <groupId>org.eclipse.emf</groupId>
               <artifactId>org.eclipse.emf.mwe.utils</artifactId>
-              <version>1.8.0</version>
+              <version>1.12.0</version>
             </dependency>
             <dependency>
               <groupId>org.eclipse.emf</groupId>
               <artifactId>org.eclipse.emf.mwe2.launch</artifactId>
-              <version>2.14.0</version>
+              <version>2.18.0</version>
             </dependency>
             <dependency>
               <groupId>org.eclipse.emf</groupId>
               <artifactId>org.eclipse.emf.mwe2.lib</artifactId>
-              <version>2.14.0</version>
+              <version>2.18.0</version>
             </dependency>
             <dependency>
               <groupId>org.eclipse.xtext</groupId>
               <artifactId>org.eclipse.xtext.common.types</artifactId>
-              <version>2.32.0</version>
+              <version>2.35.0</version>
+            </dependency>
+            <dependency>
+              <groupId>org.eclipse.xtext</groupId>
+              <artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+              <version>2.35.0</version>
             </dependency>
           </dependencies>
         </plugin>
@@ -159,7 +195,7 @@
         <plugin>
           <groupId>org.eclipse.xtend</groupId>
           <artifactId>xtend-maven-plugin</artifactId>
-          <version>2.32.0</version>
+          <version>2.35.0</version>
           <executions>
             <!-- generate Java code from Xtend code -->
             <execution>
