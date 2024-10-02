@@ -48,6 +48,12 @@ Remember to replace `x.y.z` with the actual version you want to reference.
 - if used, the workflow file is required to be named `generate.mwe2` and placed in the top-level directory `workflow`
 - the workflow should place generated files in `${project.build.directory}/generated-sources`
 
+### `org.eclipse.xtext:xtext-maven-plugin`
+
+- the execution phase `generate-sources` is used to generate Java or Xtend code from code written in a Vitruvius DSL
+- if Xtend code is referenced from the DSL and vice versa, the Xtend code needs to be processed by the xtext-maven-plugin as well, in this case the `xtend-maven-plugin` should be disabled
+- projects using the plugin need to configure the DSL (see below)
+
 ### `org.eclipse.xtend:xtend-maven-plugin`
 
 - used to generate Java code from (production and test) Xtend code
@@ -74,6 +80,7 @@ Remember to replace `x.y.z` with the actual version you want to reference.
 
 The expected project structure is an extension of the standard Maven project structure.
 Not all of the shown directories and files are required for every project, use as applicable.
+The `reactions` directory is an example for a directory, in which code written in a DSL supported by Vitruvius should be placed.
 The files `.project` and `plugin.xml` are only required when code should be generated from Ecore meta-models.
 
 ```
@@ -81,6 +88,7 @@ src/
 - main/
     - ecore/
     - java/
+    - reactions/
     - xtend/
     - resources/
 - test/
@@ -107,6 +115,73 @@ For `.genmodel` files:
 For `.ecore` files:
 - change local URIs to external meta-models (like `../../org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier`) to NS URIs (like `http://www.eclipse.org/emf/2002/Ecore#//EClassifier`)
 - to reference meta-models from other Vitruvius projects, use platform URIs of the form `platform:/resource/<plugin-id>/src/main/ecore/<meta-model>.genmodel`
+
+### Working with Vitruvius DSLs
+
+Generating Xtend or Java code from Vitruvius DSLs, like the Reactions language, requires setting up the classpath, as well as configuring the `xtext-maven-plugin` for the used language.
+
+In order for the `xtext-maven-plugin` to find the code written in the DSL, the directory in which the code is placed, as well as the output directory for the generated Xtend or Java code need to be specified.
+This is done by adding a source to the configuration of a new execution of the `build-helper-maven-plugin`.
+In the example below, replace `reactions` with the name of the used DSL.
+It is important not to use the name `add-source` as the `id` of the execution, as this would overwrite the classpath setup done the in this build parent.
+
+```
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>add-source-reactions</id>
+                <phase>generate-sources</phase>
+                <goals>
+                <goal>add-source</goal>
+            </goals>
+            <configuration>
+                <sources>
+                    <source>${project.basedir}/src/main/reactions</source>
+                    <source>${project.build.directory}/generated-sources/reactions</source>
+                </sources>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+
+To generate code from the DSL code, the used DSL packages need to be included as a dependencies of the `xtext-maven-plugin` plugin.
+If the DSL code references meta-models from foreign packages, these need to be included as dependencies for the build plugin as well.
+Note that dependencies from p2 repositories, included with the `p2-layout-resolver`, cannot be used as build plugin dependencies.
+One workaround is to create a wrapper Maven module with the p2 dependencies and no content otherwise.
+Note that the packaging of the wrapper module still needs to be `jar`.
+Below you find an example configuration of the build plugin for the Reactions language.
+
+```
+<configuration>
+    <languages>
+        <language>
+            <setup>tools.vitruv.dsls.reactions.ReactionsLanguageStandaloneSetup</setup>
+            <outputConfigurations>
+            <outputConfiguration>
+                <outputDirectory>${project.build.directory}/generated-sources/reactions</outputDirectory>
+            </outputConfiguration>
+            </outputConfigurations>
+        </language>
+    <languages>
+<configuration>
+```
+
+If the DSL code references Xtend code and vice versa, the Xtend code needs to be processed by the `xtext-maven-plugin` as well, instead of using the `xtend-maven-plugin`.
+For that, Xtend needs to be configured as an Xtext DSL as well, using the following addition to the configuration.
+
+```
+<language>
+    <setup>org.eclipse.xtend.core.XtendStandaloneSetup</setup>
+    <outputConfigurations>
+        <outputConfiguration>
+            <outputDirectory>${project.build.directory}/generated-sources/xtend</outputDirectory>
+        </outputConfiguration>
+    </outputConfigurations>
+</language>
+```
 
 ### Generated Directories and Files
 
