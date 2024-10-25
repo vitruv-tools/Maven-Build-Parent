@@ -33,6 +33,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
   <build>
@@ -206,6 +208,9 @@
               <goals>
                 <goal>generate</goal>
               </goals>
+              <configuration>
+                <javaSourceVersion>${maven.compiler.release}</javaSourceVersion>
+              </configuration>
             </execution>
           </executions>
           <dependencies>
@@ -231,6 +236,7 @@
                 <goal>compile</goal>
               </goals>
               <configuration>
+                <javaSourceVersion>${maven.compiler.release}</javaSourceVersion>
                 <outputDirectory>${project.build.directory}/generated-sources/xtend</outputDirectory>
               </configuration>
             </execution>
@@ -242,6 +248,7 @@
                 <goal>testCompile</goal>
               </goals>
               <configuration>
+                <javaSourceVersion>${maven.compiler.release}</javaSourceVersion>
                 <testOutputDirectory>${project.build.directory}/generated-test-sources/xtend</testOutputDirectory>
               </configuration>
             </execution>

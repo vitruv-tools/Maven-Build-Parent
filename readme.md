@@ -16,6 +16,11 @@ Remember to replace `x.y.z` with the actual version you want to reference.
 </parent>
 ```
 
+## Requirements
+
+To generate Java code from Xtend code, you should use a JDK with the same version as the source/target compiler version in your Maven build, as otherwise the xtend-maven-plugin could generate code that uses parts of the Java API that are not available in the used JDK.
+Currently the parent POM in this project specifies Java 17 as source/target compiler version, so you should use a JDK with version 17 for the build.
+
 ## Provided Plugins
 
 ### `org.openntf.maven:p2-layout-resolver`
