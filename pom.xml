@@ -208,9 +208,6 @@
               <goals>
                 <goal>generate</goal>
               </goals>
-              <configuration>
-                <javaSourceVersion>${maven.compiler.release}</javaSourceVersion>
-              </configuration>
             </execution>
           </executions>
           <dependencies>
