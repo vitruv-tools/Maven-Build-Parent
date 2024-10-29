@@ -1,0 +1,54 @@
+name: Continuous Integration Workflow
+
+# workflow triggers
+on:
+  # manually
+  workflow_dispatch:
+  # PRs on `main`
+  #pull_request:
+  #  branches:
+  #  - main
+  # nightly
+  #schedule:
+  #- cron: "0 2 * * *"
+
+jobs:
+  deploy-snapshot:
+    name: Verify and deploy snapshot
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.1.1
+
+    - name: Setup Java and Maven cache
+      uses: actions/setup-java@v3.13.0
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        check-latest: true
+        cache: 'maven'
+        server-id: ossrh
+        server-username: MAVEN_USERNAME
+        server-password: MAVEN_PASSWORD
+        gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+        gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+    - name: Verify build
+      run: >
+        ./mvnw clean verify
+        --batch-mode
+        --update-snapshots
+        --no-transfer-progress
+
+    - name: Deploy snapshot
+      run: >
+        ./mvnw deploy -P snapshot
+        --batch-mode
+        --no-transfer-progress
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}

@@ -29,6 +29,24 @@
     </developer>
   </developers>
 
+  <licenses>
+    <license>
+      <name>Eclipse Public License - v 2.0</name>
+      <url>https://www.eclipse.org/legal/epl-2.0/</url>
+    </license>
+  </licenses>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
   <!-- Build Definition -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -158,7 +176,8 @@
                 </arguments>
                 <classpathScope>compile</classpathScope>
                 <includePluginDependencies>true</includePluginDependencies>
-                <cleanupDaemonThreads>false</cleanupDaemonThreads> <!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
+                <cleanupDaemonThreads>false</cleanupDaemonThreads> <!-- see
+                https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
               </configuration>
             </execution>
           </executions>
@@ -197,7 +216,8 @@
         </plugin>
 
         <plugin>
-          <!-- if Xtend code is referenced from the DSL and vice versa, the Xtend code needs to be processed by the xtext-maven-plugin as well -->
+          <!-- if Xtend code is referenced from the DSL and vice versa, the Xtend code needs to be
+          processed by the xtext-maven-plugin as well -->
           <groupId>org.eclipse.xtext</groupId>
           <artifactId>xtext-maven-plugin</artifactId>
           <version>2.35.0</version>
@@ -273,6 +293,26 @@
         </plugin>
 
         <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>3.2.7</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <gpgArguments>
+              <arg>--pinentry-mode</arg>
+              <arg>loopback</arg>
+            </gpgArguments>
+          </configuration>
+        </plugin>
+
+        <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>3.1.1</version>
         </plugin>
@@ -280,8 +320,19 @@
     </pluginManagement>
   </build>
 
-  <!-- Eclipse SWT has different implementations from different platforms, which cannot be resolved automatically -->
   <profiles>
+    <profile>
+      <id>snapshot</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Eclipse SWT has different implementations from different platforms, which cannot be resolved automatically -->
     <!-- macOS profile -->
     <profile>
       <id>osx</id>
