@@ -188,6 +188,23 @@ For that, Xtend needs to be configured as an Xtext DSL as well, using the follow
 </language>
 ```
 
+If the tests of the DSL code include Xtend code, you need to use the `xtext-maven-plugin` and the `xtend-maven-plugin` simultaneously.
+However, as the main Xtend code is already processed by the `xtext-maven-plugin`, you need to disable the respective execution of the `xtend-maven-plugin`, as shown below.
+This way, only the second execution `compile-test-xtend` is executed to process the Xtend test code.
+
+```
+<plugin>
+    <groupId>org.eclipse.xtend</groupId>
+    <artifactId>xtend-maven-plugin</artifactId>
+    <executions>
+        <execution>
+            <id>compile-xtend</id>
+            <phase />
+        </execution>
+    </executions>
+</plugin>
+```
+
 ### Generated Directories and Files
 
 Generated directories and files should in general not be modified or committed, unless specified otherwise in the following list.
