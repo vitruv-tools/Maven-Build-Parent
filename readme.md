@@ -16,6 +16,25 @@ Remember to replace `x.y.z` with the actual version you want to reference.
 </parent>
 ```
 
+If you want to use a snapshot version of the Maven build parent, you need to enable snapshot dependencies from the OSSRH repository as shown below.
+
+```
+<repositories>
+    <!-- allow snapshots -->
+    <repository>
+      <id>ossrh-snapshots</id>
+      <name>OSSRH Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+</repositories>
+```
+
 ## Requirements
 
 To generate Java code from Xtend code, you should use a JDK with the same version as the source/target compiler version in your Maven build, as otherwise the xtend-maven-plugin could generate code that uses parts of the Java API that are not available in the used JDK.
@@ -213,3 +232,9 @@ Generated directories and files should in general not be modified or committed, 
 - `target/` contains Maven build results
 - `build.properties` and `plugin.properties` also contain Eclipse-specific project information
 - `plugin.xml` is generated automatically, but *should be committed* and can be altered with custom settings for Ecore meta-models
+
+## Deployment of Maven Build Parent
+
+The Maven build parent is published to Maven central using OSSRH.
+Currently, only nightly builds are published to the snapshots repository using the `Deploy snapshot` job in the `Continuous Integration` workflow running on the `main` branch.
+The Sonatype credentials and the GPG key used for signing the artifacts are provided as GitHub repository secrets.
