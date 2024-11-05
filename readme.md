@@ -16,7 +16,7 @@ Remember to replace `x.y.z` with the actual version you want to reference.
 </parent>
 ```
 
-If you want to use a snapshot version of the Maven build parent, you need to enable snapshot dependencies from the OSSRH repository as shown below.
+If you want to use a snapshot version of the Maven build parent (or of any other dependency), you need to enable snapshot dependencies from the OSSRH repository as shown below.
 
 ```
 <repositories>
@@ -94,6 +94,11 @@ Currently the parent POM in this project specifies Java 17 as source/target comp
     <manifestFile>${project.basedir}/META-INF/MANIFEST.MF</manifestFile>
 </archive>
 ```
+
+### `maven-gpg-plugin`
+
+- signs generated jar archives for deployment
+- automatically enabled by the Maven profile `snapshot`
 
 ### `maven-install-plugin`
 
@@ -233,8 +238,48 @@ Generated directories and files should in general not be modified or committed, 
 - `build.properties` and `plugin.properties` also contain Eclipse-specific project information
 - `plugin.xml` is generated automatically, but *should be committed* and can be altered with custom settings for Ecore meta-models
 
-## Deployment of Maven Build Parent
+## Deployment
 
-The Maven build parent is published to Maven central using OSSRH.
-Currently, only nightly builds are published to the snapshots repository using the `Deploy snapshot` job in the `Continuous Integration` workflow running on the `main` branch.
-The Sonatype credentials and the GPG key used for signing the artifacts are provided as GitHub repository secrets.
+The Maven build parent currently only supports snapshot deployment via OSSRH.
+The deployment process defined by the build parent is also used for the deployment of the build parent itself.
+
+### Requirements
+
+Deploying artifacts via OSSRH requires:
+
+1. a Sonatype account
+2. publish authorization for your namespace
+3. a distributed PGP key.
+
+A [guide to publishing via OSSRH](https://central.sonatype.org/publish/publish-guide/) is available as part of the Sonatype documentation, as well as a [tutorial for creating a PGP key](https://central.sonatype.org/publish/requirements/gpg/).
+The account credentials, as well as the PGP secret key, should be stored as GitHub repository secrets, named, e.g.:
+
+| Secret                        | Description                                                  |
+|-------------------------------|--------------------------------------------------------------|
+| OSSRH_USERNAME                | Username of your OSSRH user token (not your Sonatype login). |
+| OSSRH_TOKEN                   | Password of your OSSRH user token (nor your Sonatype login). |
+| OSSRH_GPG_SECRET_KEY          | Secret key generated with GPG.                               |
+| OSSRH_GPG_SECRET_KEY_PASSWORD | Password for the GPG secret key.                             |
+
+In addition, the project description in your POM needs to contain certain information described in the Sonatype requirements.
+While not all of the requirements need to be met for snapshot deployment, you should provide the information presented in the [example POM](https://central.sonatype.org/publish/requirements/#a-complete-example-pom).
+For projects in the Vitruvius Tools organization, certain information, like the `organization` and the `developers`, is provided by the Maven build parent.
+
+### Process
+
+Before you start to deploy your project, make sure the project version is set correctly.
+For snapshot deployment, this requires the version suffix `-SNAPSHOT` (case sensitive).
+To automatically set the version of a Maven project, including all its submodules, use the following command (replace `x.y.z` with your actual version) or the equivalent on your operating system:
+
+```
+./mvnw versions:set -DnewVersion=x.y.z-SNAPSHOT -DgenerateBackupPoms=false
+```
+
+With the secrets provided as environments variables, the following command can be used to deploy the build artifacts to OSSRH:
+
+```
+./mvnw deploy -P snapshot
+```
+
+In general, deployment should only be performed on a build server, using, e.g., GitHub actions.
+The workflow used to build and deploy the Maven build parent, located in the `.github/workflows` directory, can be used as a starting point for a project-specific workflow.
