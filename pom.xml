@@ -13,6 +13,7 @@
 
   <name>Vitruvius Maven Build Parent</name>
   <description>A common parent POM for all builds of vitruv.tools</description>
+  <url>https://github.com/vitruv-tools/Maven-Build-Parent</url>
 
   <!-- Organizational Information -->
   <organization>
@@ -35,6 +36,12 @@
       <url>https://www.eclipse.org/legal/epl-2.0/</url>
     </license>
   </licenses>
+
+  <scm>
+    <connection>scm:git:git://github.com/vitruv-tools/Maven-Build-Parent.git</connection>
+    <developerConnection>scm:git:https://github.com/vitruv-tools/Maven-Build-Parent.git</developerConnection>
+    <url>https://github.com/vitruv-tools/Maven-Build-Parent/tree/main</url>
+  </scm>
 
   <distributionManagement>
     <snapshotRepository>
