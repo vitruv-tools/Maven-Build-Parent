@@ -110,7 +110,10 @@ Currently the parent POM in this project specifies Java 17 as source/target comp
 The expected project structure is an extension of the standard Maven project structure.
 Not all of the shown directories and files are required for every project, use as applicable.
 The `reactions` directory is an example for a directory, in which code written in a DSL supported by Vitruvius should be placed.
-The files `.project` and `plugin.xml` are only required when code should be generated from Ecore meta-models.
+
+The file `.project` is only required when code is generated from Ecore meta-models or Xtext grammars.
+The file `plugin.xml` is only required when working with Ecore meta-models and will contain generated extension point definitions.
+There can be additional extension point definitions, e.g., when using custom factories for testing purposes.
 
 ```
 src/
@@ -119,6 +122,7 @@ src/
     - java/
     - reactions/
     - xtend/
+    - xtext/
     - resources/
 - test/
     - java/
