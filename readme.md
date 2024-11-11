@@ -137,17 +137,33 @@ pom.xml
 
 ### Working with Ecore Meta-Models
 
-Working with `.ecore` and `.genmodel` requires the correct Maven plugins and specific files in your project as described previously.
-In addition, changes to the files can be necessary, described in the following.
+The Maven build parent defines a process and a collection of Maven plugins for working with `.ecore` and `.genmodel` files as seamlessly as possible.
+It can, however, be the case, that small changes to the files are necessary, mostly due to the way Eclipse handles URIs.
 
 For `.genmodel` files:
-- change all URIs in `usedGenPackages` from local URIs to `platform:/resource/` URIs
-- change the `modelDirectory` to `/<plugin-id>/target/generated-sources/ecore`
-- check that the `genmodel:GenModel` tag contains the attribute `modelPluginID`
+- the main `genmodel:GenModel` tag needs to contain the attribute `modelPluginID` with the model plugin ID [1] as its value
+- all genpackages in the `usedGenPackages` tag need to be referenced using `platform:/resource/` URIs
+    - yes: `platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore`
+    - no: `../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore`
+    - no: `http://www.eclipse.org/emf/2002/Ecore#//ecore`
+- the model directory in the `modelDirectory` tag should be `/<model-plugin-id>/target/generated-sources/ecore`
 
 For `.ecore` files:
-- change local URIs to external meta-models (like `../../org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier`) to NS URIs (like `http://www.eclipse.org/emf/2002/Ecore#//EClassifier`)
-- to reference meta-models from other Vitruvius projects, use platform URIs of the form `platform:/resource/<plugin-id>/src/main/ecore/<meta-model>.genmodel`
+- all URIs should be namespace URIs
+    - yes: `http://www.eclipse.org/emf/2002/Ecore#//EClassifier`
+    - no: `../../org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier`
+    - no: `platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier`
+
+Sometimes it can be necessary to explicitly define a mapping between namespace URIs and `platform:/resource/` URIs for referenced meta-models. In this case, add the following to the `StandaloneSetup` definition in the `generate.mwe2` workflow file (replace the URIs as appropriate):
+
+```
+uriMap = {
+    from = "http://www.eclipse.org/emf/2002/Ecore"
+    to = "platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"
+}
+```
+
+[1] The model plugin ID is usually the artifact ID of the Maven project. It must be used consistent in the genmodel, the `.project` file and the `generate.mwe2` workflow file (for the `platform:/resource/` URIs, as well as for the module name at the beginning of the file).
 
 ### Working with Vitruvius DSLs
 
