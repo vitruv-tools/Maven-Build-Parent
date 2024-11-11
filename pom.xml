@@ -115,6 +115,7 @@
               </goals>
               <configuration>
                 <sources>
+                  <source>${project.basedir}/src/main/ecore</source>
                   <source>${project.basedir}/src/main/xtend</source>
                   <source>${project.basedir}/src/main/xtext</source>
                   <source>${project.build.directory}/generated-sources/ecore</source>
