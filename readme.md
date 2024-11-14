@@ -112,8 +112,8 @@ Not all of the shown directories and files are required for every project, use a
 The `reactions` directory is an example for a directory, in which code written in a DSL supported by Vitruvius should be placed.
 
 The file `.project` is only required when code is generated from Ecore meta-models or Xtext grammars.
-The file `plugin.xml` is only required when working with Ecore meta-models and will contain generated extension point definitions.
-There can be additional extension point definitions, e.g., when using custom factories for testing purposes.
+The file `plugin.xml` is automatically generated when working with Ecore meta-models and will contain generated extension point definitions.
+It can be modified to include additional extension point definitions, e.g., when using custom factories for testing purposes.
 
 ```
 src/
@@ -135,10 +135,32 @@ plugin.xml
 pom.xml
 ```
 
+### Examples
+
+The folder `examples/` contains examples of files required for the build process.
+The following list described the purpose of the files, as well as the necessary changes for using them.
+
+- `.project` - marks the root directory
+    - Change the name (`my.project.model`) to the model plugin ID (usually the Maven artifact ID).
+- `generate.mwe2` - defines the workflow for building Ecore meta-models and Xtext grammars
+    - Change the module name (`my.project.model`) to the model plugin ID (usually the Maven artifact ID).
+    - Add/remove components, as required for the project (one `EcoreGenerator` per Ecore meta-model, one `XtextGenerator` per Xtext language).
+    - Change the names and paths as applicable, while following the expected project structure.
+    - For `XtextGenerator`s, enable or disable the generator features (e.g., `serializer`, `generator`) as applicable.
+
 ### Working with Ecore Meta-Models
 
 The Maven build parent defines a process and a collection of Maven plugins for working with `.ecore` and `.genmodel` files as seamlessly as possible.
 It can, however, be the case, that small changes to the files are necessary, mostly due to the way Eclipse handles URIs.
+When working with EMF technology, there are four kinds of URIs, which should be used in different contexts (or not at all).
+Referencing of elements, e.g., a specific class or attribute, inside an artifact, e.g., a meta-model, is possible with relative paths after an `#` at the end of a URI (see examples below).
+
+| Name                     | Description                                                                                                                                     | Example                                                      |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
+| Namespace URIs (NS-URIs) | Global, absolute identifier for artifacts, mainly meta-models                                                                                   | `http://www.eclipse.org/emf/2002/Ecore#//ecore`              |
+| Platform Resource URIs   | File-based URI for resources contained in packages. Contains the plugin/artifact ID [1] and a path relative to the package, e.g., inside a JAR. | `platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore` |
+| Other Platform URIs      | Eclipse-specific URIs for resources, must not be used.                                                                                          | `platform:/plugin/...`                                       |
+| Relative URIs            | Relative URIs for artifacts, should be avoided.                                                                                                 | `../../model/Ecore.ecore`                                    |
 
 For `.genmodel` files:
 - the main `genmodel:GenModel` tag needs to contain the attribute `modelPluginID` with the model plugin ID [1] as its value
