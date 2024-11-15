@@ -35,6 +35,8 @@ If you want to use a snapshot version of the Maven build parent (or of any other
 </repositories>
 ```
 
+An example project showcasing the usage and capabilities of the Maven build parent is the [EMF-Template](https://github.com/vitruv-tools/EMF-Template) project in the [vitruv-tools](https://vitruv.tools/) GitHub organization.
+
 ## Requirements
 
 To generate Java code from Xtend code, you should use a JDK with the same version as the source/target compiler version in your Maven build, as otherwise the xtend-maven-plugin could generate code that uses parts of the Java API that are not available in the used JDK.
@@ -176,6 +178,9 @@ For `.ecore` files:
     - no: `../../org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier`
     - no: `platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EClassifier`
 
+Examples for both kinds of files can be found in the EMF-Template repository.
+A small [genmodel](https://github.com/vitruv-tools/EMF-Template/blob/7ba1d2a49971e56cdf9e9cac3a5373c70db16777/modelextension/src/main/ecore/extended-model.genmodel) file shows the required tags and the use of `platform:/resource` URIs, while an [ecore](https://github.com/vitruv-tools/EMF-Template/blob/7ba1d2a49971e56cdf9e9cac3a5373c70db16777/modelextension/src/main/ecore/extended-model.ecore) file shows the use of namespace URIs.
+
 Sometimes it can be necessary to explicitly define a mapping between namespace URIs and `platform:/resource/` URIs for referenced meta-models. In this case, add the following to the `StandaloneSetup` definition in the `generate.mwe2` workflow file (replace the URIs as appropriate):
 
 ```
@@ -223,6 +228,11 @@ If the DSL code references meta-models from foreign packages, these need to be i
 Note that dependencies from p2 repositories, included with the `p2-layout-resolver`, cannot be used as build plugin dependencies.
 One workaround is to create a wrapper Maven module with the p2 dependencies and no content otherwise.
 Note that the packaging of the wrapper module still needs to be `jar`.
+
+The [EMF-Template] project contains a module [imports](https://github.com/vitruv-tools/EMF-Template/tree/7ba1d2a49971e56cdf9e9cac3a5373c70db16777/imports) where this is shown for an example DSL allowing (only) meta-model imports.
+To import the `persons` meta-model from a p2 updatesite dependency in [line 2](https://github.com/vitruv-tools/EMF-Template/blob/7ba1d2a49971e56cdf9e9cac3a5373c70db16777/imports/demo/src/main/importslanguage/example.imports#L2) of the file `example.imports`, an additional module `dependencywrapper` is added and included as dependency.
+The p2 dependencies are then included in the [POM](https://github.com/vitruv-tools/EMF-Template/blob/7ba1d2a49971e56cdf9e9cac3a5373c70db16777/imports/dependencywrapper/pom.xml) of the dependency wrapper module.
+
 Below you find an example configuration of the build plugin for the Reactions language.
 
 ```
