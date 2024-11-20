@@ -1,58 +1,74 @@
-name: Verify and publish to Maven Central
+name: CI
+
+# workflow triggers
 on:
-  push:
-    branches: [main, develop]
-  release:
-    types: [created]
+  # manually
+  workflow_dispatch:
+  # PRs on `main`
   pull_request:
+    branches: [main]
+  # nightly
+  schedule:
+  - cron: "0 2 * * *"
+
 jobs:
-  publish:
-    name: Verify and Publish
+  verify:
+    name: Verify build
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-      - name: Set up Java for publishing to Maven Central Repository
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: 17
-          server-id: ossrh
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-          gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
-      - name: Verify configuration
-        run: >
-          ./mvnw clean verify
-          -Dgpg.skip
-          --batch-mode
-          --no-transfer-progress
-        env:
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-      - name: Deploy snapshot
-        if: github.ref == 'refs/heads/develop' && github.repository_owner == 'vitruv-tools'
-        run: >
-          ./mvnw deploy
-          --batch-mode
-          --no-transfer-progress
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-      - name: Deploy release
-        if: github.event_name == 'release' && github.repository_owner == 'vitruv-tools'
-        run: >
-          ./mvnw deploy -P release
-          --batch-mode
-          --no-transfer-progress
-        env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+    - name: Checkout repository
+      uses: actions/checkout@v4.1.1
+
+    - name: Setup Java and Maven cache
+      uses: actions/setup-java@v3.13.0
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        check-latest: true
+        cache: 'maven'
+
+    - name: Verify build
+      run: >
+        ./mvnw clean verify
+        --batch-mode
+        --update-snapshots
+        --no-transfer-progress
+
+  deploy-snapshot:
+    name: Deploy snapshot
+    runs-on: ubuntu-latest
+    needs: [verify]
+    if: github.ref == 'refs/heads/main' && github.repository_owner == 'vitruv-tools'
+    strategy:
+      fail-fast: true
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.1.1
+
+    - name: Setup Java and Maven cache
+      uses: actions/setup-java@v3.13.0
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        check-latest: true
+        cache: 'maven'
+        server-id: ossrh
+        server-username: MAVEN_USERNAME
+        server-password: MAVEN_PASSWORD
+        gpg-private-key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+        gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+    - name: Deploy snapshot
+      run: >
+        ./mvnw clean deploy -P snapshot
+        --batch-mode
+        --update-snapshots
+        --no-transfer-progress
+      env:
+        MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+        MAVEN_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}

@@ -1,564 +1,492 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>tools.vitruv</groupId>
-	<artifactId>parent</artifactId>
-	<version>2.1.5</version>
-	<name>${project.artifactId}</name>
-	<description>A common parent POM for all builds of vitruv.tools</description>
-	<url>http://vitruv.tools</url>
-	<packaging>pom</packaging>
+  <!-- Project Information -->
+  <groupId>tools.vitruv</groupId>
+  <artifactId>parent</artifactId>
+  <version>3.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-	<licenses>
-		<license>
-			<name>Eclipse Public License - v 2.0</name>
-			<url>https://www.eclipse.org/legal/epl-2.0/</url>
-		</license>
-	</licenses>
+  <name>Vitruvius Maven Build Parent</name>
+  <description>A common parent POM for all builds of vitruv.tools</description>
+  <url>https://github.com/vitruv-tools/Maven-Build-Parent</url>
 
-	<developers>
-		<developer>
-			<name>Vitruvius Developers</name>
-			<email>vitruv-dev@lists.kit.edu</email>
-			<organization>Karlsruhe Institute of Technology (KIT), Germany</organization>
-			<organizationUrl>https://kit.edu</organizationUrl>
-		</developer>
-	</developers>
+  <!-- Organizational Information -->
+  <organization>
+    <name>Vitruvius Tools</name>
+    <url>https://vitruv.tools/</url>
+  </organization>
 
-	<scm>
-		<connection>scm:git:git://github.com/vitruv-tools/Maven-Build-Parent.git</connection>
-		<developerConnection>scm:git:ssh://github.com/vitruv-tools/Maven-Build-Parent.git</developerConnection>
-		<url>https://github.com/vitruv-tools/Maven-Build-Parent</url>
-	</scm>
+  <developers>
+    <developer>
+      <name>Vitruvius Developers</name>
+      <email>vitruv-dev@lists.kit.edu</email>
+      <organization>Karlsruhe Institute of Technology (KIT), Germany</organization>
+      <organizationUrl>https://kit.edu</organizationUrl>
+    </developer>
+  </developers>
 
-	<properties>
-		<eclipse.version>2023-03</eclipse.version>
-		<eclipse.updatesite>https://download.eclipse.org/releases/${eclipse.version}</eclipse.updatesite>
-		<exec-maven-plugin.version>3.1.0</exec-maven-plugin.version> <!-- https://central.sonatype.com/artifact/org.codehaus.mojo/exec-maven-plugin/3.1.0 -->
-		<junit-jupiter.version>5.9.2</junit-jupiter.version> <!-- https://central.sonatype.com/artifact/org.junit.jupiter/junit-jupiter/5.9.2 -->
-		<maven-clean-plugin.version>3.2.0</maven-clean-plugin.version> <!-- https://central.sonatype.com/artifact/org.apache.maven.plugins/maven-clean-plugin/3.2.0 -->
-		<maven-compiler.version>3.11.0</maven-compiler.version> <!-- https://central.sonatype.com/artifact/org.apache.maven.plugins/maven-compiler-plugin/3.11.0 -->
-		<maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version> <!-- https://central.sonatype.com/artifact/org.apache.maven.plugins/maven-gpg-plugin/3.0.1 -->
-		<maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version> <!-- https://central.sonatype.com/artifact/org.apache.maven.plugins/maven-surefire-plugin/3.0.0 -->
-		<nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version> <!-- https://central.sonatype.com/artifact/org.sonatype.plugins/nexus-staging-maven-plugin/1.6.13 -->
-		<org.eclipse.emf.codegen.version>2.23.0</org.eclipse.emf.codegen.version> <!-- https://central.sonatype.com/artifact/org.eclipse.emf/org.eclipse.emf.codegen/2.23.0 -->
-		<org.eclipse.emf.codegen.ecore.version>2.33.0</org.eclipse.emf.codegen.ecore.version> <!-- https://central.sonatype.com/artifact/org.eclipse.emf/org.eclipse.emf.codegen.ecore/2.33.0 -->
-		<org.eclipse.emf.mwe.utils.version>1.8.0</org.eclipse.emf.mwe.utils.version> <!-- https://central.sonatype.com/artifact/org.eclipse.emf/org.eclipse.emf.mwe.utils/1.8.0 -->
-		<org.eclipse.emf.mwe2.version>2.14.0</org.eclipse.emf.mwe2.version> <!-- https://central.sonatype.com/artifact/org.eclipse.emf/org.eclipse.emf.mwe2.lib/2.14.0 -->
-		<tycho.version>4.0.3</tycho.version> <!-- https://central.sonatype.com/artifact/org.eclipse.tycho/tycho-maven-plugin/4.0.2 -->
-		<xtext.version>2.30.0</xtext.version> <!-- https://central.sonatype.com/artifact/org.eclipse.xtext/org.eclipse.xtext.common.types/2.30.0 -->
-		<sdq.commons.version>2.2.0</sdq.commons.version> <!-- https://github.com/kit-sdq/SDQ-Commons -->
-		<sdq.xannotations.version>1.6.0</sdq.xannotations.version> <!-- https://github.com/kit-sdq/XAnnotations -->
-		<sdq.demometamodels.version>1.9.0</sdq.demometamodels.version> <!-- https://github.com/kit-sdq/DemoMetamodels -->
-		<macos-jvm-swt-flags/> <!-- flag for SWT workaround on macOS -->
-		<maven.compiler.release>17</maven.compiler.release>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	</properties>
+  <licenses>
+    <license>
+      <name>Eclipse Public License - v 2.0</name>
+      <url>https://www.eclipse.org/legal/epl-2.0/</url>
+    </license>
+  </licenses>
 
-	<repositories>
-		<repository>
-			<id>Eclipse</id>
-			<layout>p2</layout>
-			<url>${eclipse.updatesite}</url>
-		</repository>
-		<repository>
-			<id>Eclipse Plug-Ins</id>
-			<layout>p2</layout>
-			<url>https://download.eclipse.org/tools/orbit/downloads/${eclipse.version}</url>
-		</repository>
-		<repository>
-			<id>Vitruv License</id>
-			<layout>p2</layout>
-			<url>https://vitruv-tools.github.io/updatesite/release/license</url>
-		</repository>
-	</repositories>
+  <scm>
+    <connection>scm:git:git://github.com/vitruv-tools/Maven-Build-Parent.git</connection>
+    <developerConnection>scm:git:https://github.com/vitruv-tools/Maven-Build-Parent.git</developerConnection>
+    <url>https://github.com/vitruv-tools/Maven-Build-Parent/tree/main</url>
+  </scm>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>${junit-jupiter.version}</version>
-		</dependency>
-	</dependencies>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
-	<build>
-		<plugins>
-			<!-- Tycho target platform -->
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-			</plugin>
+  <!-- Build Definition -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
 
-			<!-- Cleanup -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-clean-plugin</artifactId>
-			</plugin>
+  <build>
+    <resources>
+      <!-- add Ecore files to build artifact -->
+      <resource>
+        <directory>${project.basedir}</directory>
+        <includes>
+          <include>src/main/ecore/**/*</include>
+          <include>plugin.properties</include>
+          <include>plugin.xml</include>
+        </includes>
+      </resource>
+      <!-- add Xtext files to build artifact -->
+      <resource>
+        <directory>${project.build.directory}/generated-sources/xtext-java</directory>
+        <includes>
+          <include>**/*.xtextbin</include>
+          <include>**/*.xmi</include>
+          <include>**/*.g</include>
+          <include>**/*.tokens</include>
+        </includes>
+      </resource>
+    </resources>
 
-			<!-- Build (Xtend) -->
-			<plugin>
-				<groupId>org.eclipse.xtend</groupId>
-				<artifactId>xtend-maven-plugin</artifactId>
-			</plugin>
+    <pluginManagement>
+      <plugins>
+        <!-- delete `target` folder where all (also intermediate) build results are placed -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.3.1</version>
+        </plugin>
 
-			<!-- Build (Tycho) -->
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-source-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-p2-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-maven-plugin</artifactId>
-				<extensions>true</extensions>
-			</plugin>
+        <!-- allow Eclipse update sites as repositories -->
+        <plugin>
+          <groupId>org.openntf.maven</groupId>
+          <artifactId>p2-layout-resolver</artifactId>
+          <version>1.7.0</version>
+          <extensions>true</extensions>
+        </plugin>
 
-			<!-- Tests -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-		</plugins>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>3.4.0</version>
+          <executions>
+            <!-- add Xtend and generated code to classpath -->
+            <execution>
+              <id>add-source</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>add-source</goal>
+              </goals>
+              <configuration>
+                <sources>
+                  <source>${project.basedir}/src/main/ecore</source>
+                  <source>${project.basedir}/src/main/xtend</source>
+                  <source>${project.basedir}/src/main/xtext</source>
+                  <source>${project.build.directory}/generated-sources/ecore</source>
+                  <source>${project.build.directory}/generated-sources/xtend</source>
+                  <source>${project.build.directory}/generated-sources/xtext-ecore</source>
+                  <source>${project.build.directory}/generated-sources/xtext-java</source>
+                </sources>
+              </configuration>
+            </execution>
+            <!-- add Xtend and generated test code to classpath -->
+            <execution>
+              <id>add-test-source</id>
+              <phase>generate-test-sources</phase>
+              <goals>
+                <goal>add-test-source</goal>
+              </goals>
+              <configuration>
+                <sources>
+                  <source>${project.basedir}/src/test/xtend</source>
+                  <source>${project.build.directory}/generated-test-sources/xtend</source>
+                  <source>${project.build.directory}/generated-test-sources/xtext-java</source>
+                </sources>
+              </configuration>
+            </execution>
+            <!-- add generated Xtext resources to the classpath -->
+            <execution>
+              <id>add-test-resource</id>
+              <phase>generate-test-resources</phase>
+              <goals>
+                <goal>add-test-resource</goal>
+              </goals>
+              <configuration>
+                <resources>
+                  <resource>
+                    <directory>${project.build.directory}/generated-sources/xtext-java</directory>
+                    <includes>
+                      <include>**/*.xtextbin</include>
+                      <include>**/*.xmi</include>
+                    </includes>
+                  </resource>
+                </resources>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
 
-		<pluginManagement>
-			<plugins>
-				<!--- Use Tycho -->
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-maven-plugin</artifactId>
-					<version>${tycho.version}</version>
-					<extensions>true</extensions>
-				</plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.1.0</version>
+          <executions>
+            <!-- generate code from Ecore meta-models and Xtext grammars -->
+            <execution>
+              <id>execute-mwe2-generate</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>java</goal>
+              </goals>
+              <configuration>
+                <mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
+                <arguments>
+                  <!-- worflow file must be placed in `workflow` directory and named `generate.mwe2` -->
+                  <argument>/${project.basedir}/workflow/generate.mwe2</argument>
+                  <argument>-p</argument>
+                  <argument>workspaceRoot=${project.basedir}</argument>
+                </arguments>
+                <classpathScope>compile</classpathScope>
+                <includePluginDependencies>true</includePluginDependencies>
+                <cleanupDaemonThreads>false</cleanupDaemonThreads> <!-- see
+                https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
+              </configuration>
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>org.eclipse.emf</groupId>
+              <artifactId>org.eclipse.emf.codegen.ecore</artifactId>
+              <version>2.38.0</version>
+            </dependency>
+            <dependency>
+              <groupId>org.eclipse.emf</groupId>
+              <artifactId>org.eclipse.emf.mwe.utils</artifactId>
+              <version>1.12.0</version>
+            </dependency>
+            <dependency>
+              <groupId>org.eclipse.emf</groupId>
+              <artifactId>org.eclipse.emf.mwe2.launch</artifactId>
+              <version>2.18.0</version>
+            </dependency>
+            <dependency>
+              <groupId>org.eclipse.emf</groupId>
+              <artifactId>org.eclipse.emf.mwe2.lib</artifactId>
+              <version>2.18.0</version>
+            </dependency>
+            <dependency>
+              <groupId>org.eclipse.xtext</groupId>
+              <artifactId>org.eclipse.xtext.common.types</artifactId>
+              <version>2.35.0</version>
+            </dependency>
+            <dependency>
+              <groupId>org.eclipse.xtext</groupId>
+              <artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+              <version>2.35.0</version>
+            </dependency>
+          </dependencies>
+        </plugin>
 
-				<!-- Target platform configuration -->
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>target-platform-configuration</artifactId>
-					<version>${tycho.version}</version>
-					<configuration>
-						<pomDependencies>consider</pomDependencies>
-						<environments>
-							<environment>
-								<os>linux</os>
-								<ws>gtk</ws>
-								<arch>x86_64</arch>
-							</environment>
-							<environment>
-								<os>win32</os>
-								<ws>win32</ws>
-								<arch>x86_64</arch>
-							</environment>
-							<environment>
-								<os>macosx</os>
-								<ws>cocoa</ws>
-								<arch>x86_64</arch>
-							</environment>
-							<environment>
-								<os>macosx</os>
-								<ws>cocoa</ws>
-								<arch>aarch64</arch>
-							</environment>
-						</environments>
-					</configuration>
-				</plugin>
+        <plugin>
+          <!-- if Xtend code is referenced from the DSL and vice versa, the Xtend code needs to be
+          processed by the xtext-maven-plugin as well -->
+          <groupId>org.eclipse.xtext</groupId>
+          <artifactId>xtext-maven-plugin</artifactId>
+          <version>2.35.0</version>
+          <executions>
+            <!-- generate Java code from Vitruvius DSL code -->
+            <execution>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>generate</goal>
+              </goals>
+            </execution>
+          </executions>
+          <dependencies>
+            <!-- required for DSLs that generate Xtend code -->
+            <dependency>
+              <groupId>org.eclipse.xtend</groupId>
+              <artifactId>org.eclipse.xtend.core</artifactId>
+              <version>2.35.0</version>
+            </dependency>
+          </dependencies>
+        </plugin>
 
-				<!-- Consider Xtend in cleanup -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>${maven-clean-plugin.version}</version>
-					<executions>
-						<execution>
-							<id>gen-clean</id>
-							<phase>clean</phase>
-							<goals>
-								<goal>clean</goal>
-							</goals>
-							<configuration>
-								<filesets>
-									<fileset>
-										<directory>xtend-gen</directory>
-									</fileset>
-								</filesets>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
+        <plugin>
+          <groupId>org.eclipse.xtend</groupId>
+          <artifactId>xtend-maven-plugin</artifactId>
+          <version>2.35.0</version>
+          <executions>
+            <!-- generate Java code from Xtend code -->
+            <execution>
+              <id>compile-xtend</id>
+              <phase>generate-sources</phase>
+              <goals>
+                <goal>compile</goal>
+              </goals>
+              <configuration>
+                <javaSourceVersion>${maven.compiler.release}</javaSourceVersion>
+                <outputDirectory>${project.build.directory}/generated-sources/xtend</outputDirectory>
+              </configuration>
+            </execution>
+            <!-- generate Java test code from Xtend test code -->
+            <execution>
+              <id>compile-test-xtend</id>
+              <phase>generate-test-sources</phase>
+              <goals>
+                <goal>testCompile</goal>
+              </goals>
+              <configuration>
+                <javaSourceVersion>${maven.compiler.release}</javaSourceVersion>
+                <testOutputDirectory>${project.build.directory}/generated-test-sources/xtend</testOutputDirectory>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
 
-				<!-- Configure exec-maven-plugin for launching MWE2 -->
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>exec-maven-plugin</artifactId>
-					<version>${exec-maven-plugin.version}</version>
-					<dependencies>
-						<dependency>
-							<groupId>org.eclipse.emf</groupId>
-							<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
-							<version>${org.eclipse.emf.mwe2.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>org.eclipse.xtext</groupId>
-							<artifactId>org.eclipse.xtext.common.types</artifactId>
-							<version>${xtext.version}</version>
-						</dependency>
-					</dependencies>
-				</plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.3.1</version>
+        </plugin>
 
-				<!-- Use Xtend -->
-				<plugin>
-					<groupId>org.eclipse.xtend</groupId>
-					<artifactId>xtend-maven-plugin</artifactId>
-					<version>${xtext.version}</version>
-					<executions>
-						<execution>
-							<phase>generate-sources</phase>
-							<goals>
-								<goal>compile</goal>
-							</goals>
-							<configuration>
-								<outputDirectory>xtend-gen</outputDirectory>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.11.0</version>
+        </plugin>
 
-				<!-- Use Tycho compiler without project-specific settings -->
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-compiler-plugin</artifactId>
-					<version>${tycho.version}</version>
-					<configuration>
-						<useProjectSettings>false</useProjectSettings>
-					</configuration>
-				</plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.1.2</version>
+        </plugin>
 
-				<!-- Run test with normal surefire -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>${maven-surefire-plugin.version}</version>
-					<executions>
-						<execution>
-							<id>test</id>
-							<phase>test</phase>
-							<goals>
-								<goal>test</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<redirectTestOutputToFile>true</redirectTestOutputToFile>
-						<!-- We do not (need to) mark the source folder in eclipse-test-plugins as a test source folder, so classes are compiled into the ordinary output directory -->
-						<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
-						<trimStackTrace>false</trimStackTrace>
-					</configuration>
-				</plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
 
-				<!-- Do not run tests with Tycho surefire by default-->
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-surefire-plugin</artifactId>
-					<version>${tycho.version}</version>
-					<executions>
-						<execution>
-							<id>default-test</id>
-							<phase>none</phase>
-						</execution>
-					</executions>
-					<configuration>
-						<failIfNoTests>true</failIfNoTests>
-						<trimStackTrace>false</trimStackTrace>
-					</configuration>
-				</plugin>
+        <plugin>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>3.2.7</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <gpgArguments>
+              <arg>--pinentry-mode</arg>
+              <arg>loopback</arg>
+            </gpgArguments>
+          </configuration>
+        </plugin>
 
-				<!-- Creates source versions of bundles and features -->
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-source-plugin</artifactId>
-					<version>${tycho.version}</version>
-					<executions>
-						<execution>
-							<id>plugin-source</id>
-							<goals>
-								<goal>plugin-source</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>feature-source</id>
-							<goals>
-								<goal>feature-source</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.1.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
-				<!-- Correctly handles source features on p2 update site -->
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-p2-plugin</artifactId>
-					<version>${tycho.version}</version>
-					<executions>
-						<execution>
-							<id>attach-p2-metadata</id>
-							<phase>package</phase>
-							<goals>
-								<goal>p2-metadata</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
+  <profiles>
+    <profile>
+      <id>snapshot</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-gpg-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
 
-	<profiles>
-		<!-- Build configuration of parent POM itself -->
-		<profile>
-			<id>local-build</id>
-			<activation>
-				<file>
-					<exists>.maven_local-build</exists>
-				</file>
-			</activation>
-			<distributionManagement>
-				<snapshotRepository>
-					<id>ossrh</id>
-					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-				</snapshotRepository>
-				<repository>
-					<id>ossrh</id>
-					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-				</repository>
-			</distributionManagement>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>${maven-gpg-plugin.version}</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<gpgArguments>
-								<arg>--pinentry-mode</arg>
-								<arg>loopback</arg>
-							</gpgArguments>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+    <!-- Eclipse SWT has different implementations from different platforms, which cannot be resolved automatically -->
+    <!-- macOS profile -->
+    <profile>
+      <id>osx</id>
+      <activation>
+        <os>
+          <family>mac</family>
+        </os>
+      </activation>
+      <properties>
+        <swt.platform>cocoa.macosx.${os.arch}</swt.platform>
+      </properties>
+    </profile>
+    <!-- Linux profile-->
+    <profile>
+      <id>unix</id>
+      <activation>
+        <os>
+          <family>unix</family>
+          <name>!mac os x</name>
+        </os>
+      </activation>
+      <properties>
+        <swt.platform>gtk.linux.x86_64</swt.platform>
+      </properties>
+    </profile>
+    <!-- Linux x32 profile -->
+    <profile>
+      <id>unix-x32</id>
+      <activation>
+        <os>
+          <family>unix</family>
+          <name>!mac os x</name>
+          <arch>x86</arch>
+        </os>
+      </activation>
+      <properties>
+        <swt.platform>gtk.linux.${os.arch}</swt.platform>
+      </properties>
+    </profile>
+    <!-- Windows profile -->
+    <profile>
+      <id>windows</id>
+      <activation>
+        <os>
+          <family>windows</family>
+        </os>
+      </activation>
+      <properties>
+        <swt.platform>win32.win32.x86_64</swt.platform>
+      </properties>
+    </profile>
+    <!-- Windows x32 profile -->
+    <profile>
+      <id>windows-x32</id>
+      <activation>
+        <os>
+          <family>windows</family>
+          <arch>x86</arch>
+        </os>
+      </activation>
+      <properties>
+        <swt.platform>win32.win32.${os.arch}</swt.platform>
+      </properties>
+    </profile>
+  </profiles>
 
-		<!-- Run "mvn clean deploy -P release" to a release with this profile -->
-		<profile>
-			<id>release</id>
-			<activation>
-				<property>
-					<name>release</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<!-- To release to Maven central -->
-					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>${nexus-staging-maven-plugin.version}</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+  <!-- Dependency and Plugin Repositories -->
+  <repositories>
+    <!-- Maven Central should have priority -->
+    <repository>
+      <id>central</id>
+      <name>Maven Central</name>
+      <url>https://repo1.maven.org/maven2/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
 
-		<!-- Runs "workflow/clean.mwe2" workflow in clean phase, if existing -->
-		<profile>
-			<id>mwe2-cleanup</id>
-			<activation>
-				<file>
-					<exists>workflow/clean.mwe2</exists>
-				</file>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>clean-mwe2</id>
-								<phase>clean</phase>
-								<goals>
-									<goal>java</goal>
-								</goals>
-								<configuration>
-									<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
-									<arguments>
-										<argument>/${project.basedir}/workflow/clean.mwe2</argument>
-										<argument>-p</argument>
-										<argument>workspaceRoot=${maven.multiModuleProjectDirectory}</argument>
-									</arguments>
-									<classpathScope>compile</classpathScope>
-									<includePluginDependencies>true</includePluginDependencies>
-									<cleanupDaemonThreads>false</cleanupDaemonThreads>
-									<!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
-								</configuration>
-							</execution>
-						</executions>
-						<dependencies>
-							<dependency>
-								<groupId>org.eclipse.emf</groupId>
-								<artifactId>org.eclipse.emf.mwe.utils</artifactId>
-								<version>${org.eclipse.emf.mwe.utils.version}</version>
-							</dependency>
-						</dependencies>
-					</plugin>
+    <!-- disable snapshot repositories -->
+    <repository>
+      <id>ossrh-snapshots</id>
+      <name>OSSRH Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>sonatype-snapshots</id>
+      <name>Sonatype Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
-					<!-- Define Xtend here to ensure that it is always executed after exec-maven-plugin when occuring in same phase -->
-					<plugin>
-						<groupId>org.eclipse.xtend</groupId>
-						<artifactId>xtend-maven-plugin</artifactId>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+  <pluginRepositories>
+    <!-- Maven Central should have priority over OpenNTF Artifactory -->
+    <pluginRepository>
+      <id>central</id>
+      <name>Maven Central</name>
+      <url>https://repo1.maven.org/maven2/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
 
-		<!-- Runs "workflow/generate.mwe2" workflow in generate-source phase, if existing, with dependencies for Ecore
-			metamodel code generation. If further dependencies are required, e.g., for Xtext language builds, add them
-			to the plugin via pluginManagement -->
-		<profile>
-			<id>mwe2-execution</id>
-			<activation>
-				<file>
-					<exists>workflow/generate.mwe2</exists>
-				</file>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>execute-mwe2</id>
-								<phase>generate-sources</phase>
-								<goals>
-									<goal>java</goal>
-								</goals>
-								<configuration>
-									<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
-									<arguments>
-										<argument>/${project.basedir}/workflow/generate.mwe2</argument>
-										<argument>-p</argument>
-										<argument>workspaceRoot=${maven.multiModuleProjectDirectory}</argument>
-									</arguments>
-									<classpathScope>compile</classpathScope>
-									<includePluginDependencies>true</includePluginDependencies>
-									<cleanupDaemonThreads>false</cleanupDaemonThreads>
-									<!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
-								</configuration>
-							</execution>
-						</executions>
-						<dependencies>
-							<dependency>
-								<groupId>org.eclipse.emf</groupId>
-								<artifactId>org.eclipse.emf.mwe2.lib</artifactId>
-								<version>${org.eclipse.emf.mwe2.version}</version>
-							</dependency>
-							<dependency>
-								<groupId>org.eclipse.emf</groupId>
-								<artifactId>org.eclipse.emf.codegen</artifactId>
-								<version>${org.eclipse.emf.codegen.version}</version>
-							</dependency>
-							<dependency>
-								<groupId>org.eclipse.emf</groupId>
-								<artifactId>org.eclipse.emf.codegen.ecore</artifactId>
-								<version>${org.eclipse.emf.codegen.ecore.version}</version>
-							</dependency>
-							<dependency>
-								<groupId>org.eclipse.emf</groupId>
-								<artifactId>org.eclipse.emf.mwe.utils</artifactId>
-								<version>${org.eclipse.emf.mwe.utils.version}</version>
-							</dependency>
-						</dependencies>
-					</plugin>
+    <!-- required for the p2-layout-resolver plugin -->
+    <pluginRepository>
+      <id>artifactory.openntf.org</id>
+      <name>artifactory.openntf.org</name>
+      <url>https://artifactory.openntf.org/openntf</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
 
-					<!-- Define Xtend here to ensure that it is always executed after exec-maven-plugin when occuring in same phase -->
-					<plugin>
-						<groupId>org.eclipse.xtend</groupId>
-						<artifactId>xtend-maven-plugin</artifactId>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- Run test with tycho-surefire in a full Eclipse workbench with UI if marker file is present -->
-		<profile>
-			<id>workbench-test</id>
-			<activation>
-				<file>
-					<exists>.tests-need-workbench</exists>
-				</file>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>tycho-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>default-test</id>
-								<phase>integration-test</phase>
-							</execution>
-						</executions>
-						<configuration>
-							<useUIHarness>true</useUIHarness>
-							<useUIThread>false</useUIThread>
-							<argLine>${macos-jvm-swt-flags}</argLine>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>test</id>
-								<phase>none</phase>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<!-- macOS requires UI work to be executed on the main thread only -->
-		<profile>
-			<id>macos-jvm-swt-flags</id>
-			<activation>
-				<os>
-					<family>mac</family>
-				</os>
-			</activation>
-			<properties>
-				<macos-jvm-swt-flags>-XstartOnFirstThread</macos-jvm-swt-flags>
-			</properties>
-		</profile>
-	</profiles>
+    <!-- disable snapshot repositories -->
+    <pluginRepository>
+      <id>ossrh-snapshots</id>
+      <name>OSSRH Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>sonatype-snapshots</id>
+      <name>Sonatype Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 </project>

@@ -1,2 +1,7 @@
+# VS Code
+.vscode/
+
+# Maven
 target/
-.mvn/wrapper/maven-wrapper.jar
+*.log
+.mvn/wrapper/*.jar
