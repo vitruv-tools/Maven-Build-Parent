@@ -328,20 +328,13 @@
         <plugin>
           <groupId>org.sonatype.plugins</groupId>
           <artifactId>nexus-staging-maven-plugin</artifactId>
-          <version>1.6.8</version>
+          <version>1.7.0</version>
           <extensions>true</extensions>
           <configuration>
              <serverId>ossrh</serverId>
              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-             <autoReleaseAfterClose>false</autoReleaseAfterClose>
+             <autoReleaseAfterClose>true</autoReleaseAfterClose>
           </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>com.thoughtworks.xstream</groupId>
-              <artifactId>xstream</artifactId>
-              <version>1.4.15</version>
-            </dependency>
-          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -365,10 +358,6 @@
         <plugins>
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
