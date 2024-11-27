@@ -301,6 +301,53 @@
         </plugin>
 
         <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.3.1</version>
+          <executions>
+            <execution>
+              <id>bundle-sources</id>
+              <phase>package</phase>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.11.1</version>
+          <executions>
+            <execution>
+              <id>bundle-javadoc</id>
+              <phase>package</phase>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <tags>
+              <tag>
+                <name>model</name>
+                <placement>a</placement>
+                <head>EMF model element</head>
+              </tag>
+              <tag>
+                <name>generated</name>
+                <placement>a</placement>
+                <head>EMF generated code</head>
+              </tag>
+              <tag>
+                <name>ordered</name>
+                <placement>a</placement>
+                <head>EMF ordered</head>
+              </tag>
+            </tags>
+          </configuration>
+        </plugin>
+
+        <plugin>
           <artifactId>maven-gpg-plugin</artifactId>
           <version>3.2.7</version>
           <executions>
@@ -356,6 +403,12 @@
       <id>release</id>
       <build>
         <plugins>
+          <plugin>
+            <artifactId>maven-source-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+          </plugin>
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
           </plugin>
