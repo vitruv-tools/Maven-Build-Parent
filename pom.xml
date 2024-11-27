@@ -69,6 +69,7 @@
         <directory>${project.basedir}</directory>
         <includes>
           <include>src/main/ecore/**/*</include>
+          <include>target/generated-sources/xtext-ecore/**/*</include>
           <include>plugin.properties</include>
           <include>plugin.xml</include>
         </includes>
@@ -115,12 +116,10 @@
               </goals>
               <configuration>
                 <sources>
-                  <source>${project.basedir}/src/main/ecore</source>
                   <source>${project.basedir}/src/main/xtend</source>
                   <source>${project.basedir}/src/main/xtext</source>
                   <source>${project.build.directory}/generated-sources/ecore</source>
                   <source>${project.build.directory}/generated-sources/xtend</source>
-                  <source>${project.build.directory}/generated-sources/xtext-ecore</source>
                   <source>${project.build.directory}/generated-sources/xtext-java</source>
                 </sources>
               </configuration>
