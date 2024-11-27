@@ -69,6 +69,7 @@
         <directory>${project.basedir}</directory>
         <includes>
           <include>src/main/ecore/**/*</include>
+          <include>target/generated-sources/xtext-ecore/**/*</include>
           <include>plugin.properties</include>
           <include>plugin.xml</include>
         </includes>
@@ -115,12 +116,10 @@
               </goals>
               <configuration>
                 <sources>
-                  <source>${project.basedir}/src/main/ecore</source>
                   <source>${project.basedir}/src/main/xtend</source>
                   <source>${project.basedir}/src/main/xtext</source>
                   <source>${project.build.directory}/generated-sources/ecore</source>
                   <source>${project.build.directory}/generated-sources/xtend</source>
-                  <source>${project.build.directory}/generated-sources/xtext-ecore</source>
                   <source>${project.build.directory}/generated-sources/xtext-java</source>
                 </sources>
               </configuration>
@@ -301,6 +300,53 @@
         </plugin>
 
         <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.3.1</version>
+          <executions>
+            <execution>
+              <id>bundle-sources</id>
+              <phase>package</phase>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.11.1</version>
+          <executions>
+            <execution>
+              <id>bundle-javadoc</id>
+              <phase>package</phase>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <tags>
+              <tag>
+                <name>model</name>
+                <placement>a</placement>
+                <head>EMF model element</head>
+              </tag>
+              <tag>
+                <name>generated</name>
+                <placement>a</placement>
+                <head>EMF generated code</head>
+              </tag>
+              <tag>
+                <name>ordered</name>
+                <placement>a</placement>
+                <head>EMF ordered</head>
+              </tag>
+            </tags>
+          </configuration>
+        </plugin>
+
+        <plugin>
           <artifactId>maven-gpg-plugin</artifactId>
           <version>3.2.7</version>
           <executions>
@@ -321,6 +367,26 @@
         </plugin>
 
         <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.12</version>
+          <executions>
+            <execution>
+              <id>prepare-agent</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>report</id>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>3.1.3</version>
         </plugin>
@@ -331,9 +397,9 @@
           <version>1.7.0</version>
           <extensions>true</extensions>
           <configuration>
-             <serverId>ossrh</serverId>
-             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-             <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            <serverId>ossrh</serverId>
+            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+            <autoReleaseAfterClose>true</autoReleaseAfterClose>
           </configuration>
         </plugin>
       </plugins>
@@ -357,6 +423,12 @@
       <build>
         <plugins>
           <plugin>
+            <artifactId>maven-source-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <artifactId>maven-javadoc-plugin</artifactId>
+          </plugin>
+          <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
           </plugin>
           <plugin>
@@ -367,7 +439,20 @@
       </build>
     </profile>
 
-    <!-- Eclipse SWT has different implementations from different platforms, which cannot be resolved automatically -->
+    <profile>
+      <id>coverage</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Eclipse SWT has different implementations from different platforms, which cannot be
+    resolved automatically -->
     <!-- macOS profile -->
     <profile>
       <id>osx</id>
