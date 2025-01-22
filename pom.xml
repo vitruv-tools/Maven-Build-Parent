@@ -60,6 +60,8 @@
     <maven.compiler.release>17</maven.compiler.release>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <!-- default value, actual value is set by profiles depending on OS -->
+    <swt.platform />
   </properties>
 
   <build>
