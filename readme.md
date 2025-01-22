@@ -79,6 +79,18 @@ Currently the parent POM in this project specifies Java 17 as source/target comp
 </archive>
 ```
 
+### `org.codehaus.mojo:flatten-maven-plugin`
+
+- replaces the POM of a project with an effective, flattened POM
+- configured to remove references to external repositories
+- can be used for dependency wrapper modules
+
+### `maven-shade-plugin`
+
+- includes dependencies in the built jar archive
+- removes references to dependencies from the POM in the built jar archive
+- can be used for dependency wrapper modules
+
 ### `maven-gpg-plugin`
 
 - signs generated jar archives for deployment
