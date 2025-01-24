@@ -44,24 +44,6 @@ Currently the parent POM in this project specifies Java 17 as source/target comp
 
 ## Provided Plugins
 
-### `org.openntf.maven:p2-layout-resolver`
-
-- required for adding Eclipse update sites as repositories
-- update sites are specified as follows:
-
-```
-<repository>
-    <id>some-id</id>
-    <name>Some Name</name>
-    <layout>p2</layout>
-    <url>http://abc.xyz/org/example/com/releases/${repo.some-id.version}</url>
-</repository>
-```
-
-- replace placeholders, such as `some-id`, `Some Name` and the URL, with reasonable values
-- it is good practice to store the update site version (if applicable) in a Maven property called `repo.id.version` where `id` is the id of the update site
-- to include a dependency from an added update site, use the update site id as `groupId` of the dependency
-
 ### `org.codehaus.mojo:build-helper-maven-plugin`
 
 - required for adding code in non-Java languages (such as Xtend), as well as generated code (for Xtend and Ecore) to the classpath
@@ -96,6 +78,18 @@ Currently the parent POM in this project specifies Java 17 as source/target comp
     <manifestFile>${project.basedir}/META-INF/MANIFEST.MF</manifestFile>
 </archive>
 ```
+
+### `org.codehaus.mojo:flatten-maven-plugin`
+
+- replaces the POM of a project with an effective, flattened POM
+- configured to remove references to external repositories
+- can be used for dependency wrapper modules
+
+### `maven-shade-plugin`
+
+- includes dependencies in the built jar archive
+- removes references to dependencies from the POM in the built jar archive
+- can be used for dependency wrapper modules
 
 ### `maven-gpg-plugin`
 
@@ -225,13 +219,6 @@ It is important not to use the name `add-source` as the `id` of the execution, a
 
 To generate code from the DSL code, the used DSL packages need to be included as a dependencies of the `xtext-maven-plugin` plugin.
 If the DSL code references meta-models from foreign packages, these need to be included as dependencies for the build plugin as well.
-Note that dependencies from p2 repositories, included with the `p2-layout-resolver`, cannot be used as build plugin dependencies.
-One workaround is to create a wrapper Maven module with the p2 dependencies and no content otherwise.
-Note that the packaging of the wrapper module still needs to be `jar`.
-
-The [EMF-Template] project contains a module [imports](https://github.com/vitruv-tools/EMF-Template/tree/7ba1d2a49971e56cdf9e9cac3a5373c70db16777/imports) where this is shown for an example DSL allowing (only) meta-model imports.
-To import the `persons` meta-model from a p2 updatesite dependency in [line 2](https://github.com/vitruv-tools/EMF-Template/blob/7ba1d2a49971e56cdf9e9cac3a5373c70db16777/imports/demo/src/main/importslanguage/example.imports#L2) of the file `example.imports`, an additional module `dependencywrapper` is added and included as dependency.
-The p2 dependencies are then included in the [POM](https://github.com/vitruv-tools/EMF-Template/blob/7ba1d2a49971e56cdf9e9cac3a5373c70db16777/imports/dependencywrapper/pom.xml) of the dependency wrapper module.
 
 Below you find an example configuration of the build plugin for the Reactions language.
 

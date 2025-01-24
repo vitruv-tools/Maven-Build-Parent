@@ -60,6 +60,8 @@
     <maven.compiler.release>17</maven.compiler.release>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <!-- default value, actual value is set by profiles depending on OS -->
+    <swt.platform />
   </properties>
 
   <build>
@@ -92,14 +94,6 @@
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.4.0</version>
-        </plugin>
-
-        <!-- allow Eclipse update sites as repositories -->
-        <plugin>
-          <groupId>org.openntf.maven</groupId>
-          <artifactId>p2-layout-resolver</artifactId>
-          <version>1.9.0</version>
-          <extensions>true</extensions>
         </plugin>
 
         <plugin>
@@ -297,6 +291,56 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.4.2</version>
+        </plugin>
+
+        <!-- used for creating wrapper modules including dependencies from external repositories -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <version>1.6.0</version>
+          <executions>
+            <execution>
+              <id>flatten</id>
+              <phase>process-resources</phase>
+              <goals>
+                <goal>flatten</goal>
+              </goals>
+              <configuration>
+                <flattenMode>oss</flattenMode>
+                <pomElements>
+                  <repositories>remove</repositories>
+                  <build>remove</build>
+                </pomElements>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!-- used for creating wrapper modules including dependencies from external repositories -->
+        <plugin>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.6.0</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <createDependencyReducedPom>true</createDependencyReducedPom>
+                <useDependencyReducedPomInJar>true</useDependencyReducedPomInJar>
+                <createSourcesJar>true</createSourcesJar>
+                <filters>
+                  <filter>
+                    <artifact>tools.vitruv:*</artifact>
+                    <excludes>
+                      <exclude>META-INF/MANIFEST.MF</exclude>
+                    </excludes>
+                  </filter>
+                </filters>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
 
         <plugin>
@@ -563,21 +607,11 @@
   </repositories>
 
   <pluginRepositories>
-    <!-- Maven Central should have priority over OpenNTF Artifactory -->
+    <!-- Maven Central should have priority -->
     <pluginRepository>
       <id>central</id>
       <name>Maven Central</name>
       <url>https://repo1.maven.org/maven2/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </pluginRepository>
-
-    <!-- required for the p2-layout-resolver plugin -->
-    <pluginRepository>
-      <id>artifactory.openntf.org</id>
-      <name>artifactory.openntf.org</name>
-      <url>https://artifactory.openntf.org/openntf</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
