@@ -370,7 +370,7 @@ For projects in the Vitruvius Tools organization, certain information, like the 
 
 Before you start to deploy your project, make sure the project version is set correctly.
 For snapshot deployment, this requires the version suffix `-SNAPSHOT` (case sensitive).
-To automatically create create commits with the release version and the subsequent snapshot version, use the script `.github/prepare-release` in the root directory of the respective repository.
+To automatically create commits with the release version and the subsequent snapshot version, use the script `.github/prepare-release` in the root directory of the respective repository.
 
 ```sh
 # switches to a new branch
