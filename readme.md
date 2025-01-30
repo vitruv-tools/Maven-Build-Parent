@@ -44,30 +44,51 @@ Currently the parent POM in this project specifies Java 17 as source/target comp
 
 ## Provided Plugins
 
-### `org.codehaus.mojo:build-helper-maven-plugin`
+### Build Infrastructure
+
+#### `org.codehaus.mojo:build-helper-maven-plugin`
 
 - required for adding code in non-Java languages (such as Xtend), as well as generated code (for Xtend and Ecore) to the classpath
 - the `xtend-maven-plugin` relies on Xtend files being available on the classpath
 - the `maven-compiler-plugin` relies on generated code being available on the classpath
 
-### `org.codehaus.mojo:exec-maven-plugin`
+#### `org.codehaus.mojo:exec-maven-plugin`
 
 - the default phase `execute-mwe2-generate` is used to execute an MWE2 workflow which, e.g., generates Java code from Ecore meta-models or Xtext grammars
 - if used, the workflow file is required to be named `generate.mwe2` and placed in the top-level directory `workflow`
 - the workflow should place generated files in `${project.build.directory}/generated-sources`
 
-### `org.eclipse.xtext:xtext-maven-plugin`
+#### `org.eclipse.xtext:xtext-maven-plugin`
 
 - the execution phase `generate-sources` is used to generate Java or Xtend code from code written in a Vitruvius DSL
 - if Xtend code is referenced from the DSL and vice versa, the Xtend code needs to be processed by the xtext-maven-plugin as well, in this case the `xtend-maven-plugin` should be disabled
 - projects using the plugin need to configure the DSL (see below)
 
-### `org.eclipse.xtend:xtend-maven-plugin`
+#### `org.eclipse.xtend:xtend-maven-plugin`
 
 - used to generate Java code from (production and test) Xtend code
 - the generated code is placed in `${project.build.directory}/generated-sources/xtend` or `${project.build.directory}/generated-test-sources/xtend`
 
-### `maven-jar-plugin`
+### Code Analysis
+
+#### `org.jacoco:jacoco-maven-plugin`
+
+- calculates the code coverage from the unit tests for the individual modules
+
+#### `org.sonarsource.scanner.maven:sonar-maven-plugin`
+
+- starts the SonarQube cloud analysis
+- projects need to specify the following information as Maven properties
+
+```
+<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+<sonar.organization>vitruv-tools</sonar.organization> <!-- replace with your organization ID, if necessary -->
+<sonar.projectKey>vitruv-tools_XYZ</sonar.projectKey> <!-- replace with your project key -->
+```
+
+### Deployment
+
+#### `maven-jar-plugin`
 
 - packages the build results in a jar archive
 - should be disabled for test-only projects by setting an empty `phase` for the execution `default-jar`
@@ -79,27 +100,68 @@ Currently the parent POM in this project specifies Java 17 as source/target comp
 </archive>
 ```
 
-### `org.codehaus.mojo:flatten-maven-plugin`
+#### `org.codehaus.mojo:flatten-maven-plugin`
 
 - replaces the POM of a project with an effective, flattened POM
 - configured to remove references to external repositories
 - can be used for dependency wrapper modules
 
-### `maven-shade-plugin`
+#### `maven-shade-plugin`
 
 - includes dependencies in the built jar archive
 - removes references to dependencies from the POM in the built jar archive
 - can be used for dependency wrapper modules
 
-### `maven-gpg-plugin`
+#### `maven-source-plugin`
+
+- creates a JAR containing the source files of the module
+
+#### `maven-javadoc-plugin`
+
+- creates a JAR containing the JavaDoc files of the module
+- contains the necessary configuration for EMF JavaDoc tags
+
+#### `maven-gpg-plugin`
 
 - signs generated jar archives for deployment
 - automatically enabled by the Maven profile `snapshot`
 
-### `maven-install-plugin`
+#### `maven-install-plugin`
 
 - copies the packaged build results in the users local repository
 - must be disabled if `maven-jar-plugin` is disabled
+
+## Provided Profiles
+
+Profiles combine plugin activations for different use cases.
+The Maven build parent currently supports the following profiles, which can be activated using the flag `-P <name>` where `<name>` is the name of the profile.
+
+### Profile `coverage`
+
+activates the code coverage analysis
+
+| Activated Plugins                |
+|----------------------------------|
+| `org.jacoco:jacoco-maven-plugin` |
+
+### Profile `snapshot`
+
+used for snapshot deployment
+
+| Activated Plugins  |
+|--------------------|
+| `maven-gpg-plugin` |
+
+### Profile `release`
+
+used for release deployment
+
+| Activated Plugins                                 |
+|---------------------------------------------------|
+| `maven-source-plugin`                             |
+| `maven-javadoc-plugin`                            |
+| `maven-gpg-plugin`                                |
+| `org.sonatype.plugins:nexus-staging-maven-plugin` |
 
 ## Expected Project Structure
 
@@ -279,7 +341,7 @@ Generated directories and files should in general not be modified or committed, 
 
 ## Deployment
 
-The Maven build parent currently only supports snapshot deployment via OSSRH.
+The Maven build parent supports snapshot and release deployment via OSSRH.
 The deployment process defined by the build parent is also used for the deployment of the build parent itself.
 
 ### Requirements
@@ -308,16 +370,19 @@ For projects in the Vitruvius Tools organization, certain information, like the 
 
 Before you start to deploy your project, make sure the project version is set correctly.
 For snapshot deployment, this requires the version suffix `-SNAPSHOT` (case sensitive).
-To automatically set the version of a Maven project, including all its submodules, use the following command (replace `x.y.z` with your actual version) or the equivalent on your operating system:
+To automatically create commits with the release version and the subsequent snapshot version, use the script `.github/prepare-release` in the root directory of the respective repository.
 
+```sh
+# switches to a new branch
+# creates a first commit with the release version 3.1.7
+# creates a second commit with the snapshot version 3.2.0-SNAPSHOT
+.github/prepare-release 3.1.7 3.2.0
 ```
+
+To manually set the version of a Maven project, including all its submodules, use the following command (replace `x.y.z` with your actual version) or the equivalent on your operating system:
+
+```sh
 ./mvnw versions:set -DnewVersion=x.y.z-SNAPSHOT -DgenerateBackupPoms=false
-```
-
-With the secrets provided as environments variables, the following command can be used to deploy the build artifacts to OSSRH:
-
-```
-./mvnw deploy -P snapshot
 ```
 
 In general, deployment should only be performed on a build server, using, e.g., GitHub actions.
