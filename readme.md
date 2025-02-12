@@ -105,6 +105,7 @@ Currently the parent POM in this project specifies Java 17 as source/target comp
 - replaces the POM of a project with an effective, flattened POM
 - configured to remove references to external repositories
 - can be used for dependency wrapper modules
+- removes empty tags, so be careful with tags that are required for deployment, e.g., `description`
 
 #### `maven-shade-plugin`
 
