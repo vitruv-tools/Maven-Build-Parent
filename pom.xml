@@ -267,6 +267,7 @@
                   <resource>
                     <directory>${project.basedir}</directory>
                     <includes>
+                      <include>META-INF/MANIFEST.MF</include>
                       <include>src/main/ecore/**/*</include>
                       <include>target/generated-sources/xtext-ecore/**/*</include>
                       <include>plugin.properties</include>
