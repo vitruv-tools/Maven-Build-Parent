@@ -65,35 +65,12 @@
   </properties>
 
   <build>
-    <resources>
-      <!-- add Ecore files to build artifact -->
-      <resource>
-        <directory>${project.basedir}</directory>
-        <includes>
-          <include>src/main/ecore/**/*</include>
-          <include>target/generated-sources/xtext-ecore/**/*</include>
-          <include>plugin.properties</include>
-          <include>plugin.xml</include>
-        </includes>
-      </resource>
-      <!-- add Xtext files to build artifact -->
-      <resource>
-        <directory>${project.build.directory}/generated-sources/xtext-java</directory>
-        <includes>
-          <include>**/*.xtextbin</include>
-          <include>**/*.xmi</include>
-          <include>**/*.g</include>
-          <include>**/*.tokens</include>
-        </includes>
-      </resource>
-    </resources>
-
     <pluginManagement>
       <plugins>
         <!-- delete `target` folder where all (also intermediate) build results are placed -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>3.4.0</version>
+          <version>3.4.1</version>
         </plugin>
 
         <plugin>
@@ -276,6 +253,41 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.3.1</version>
+          <executions>
+            <execution>
+              <id>copy-resources</id>
+              <phase>process-resources</phase>
+              <goals>
+                <goal>copy-resources</goal>
+              </goals>
+              <configuration>
+                <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                <resources>
+                  <!-- add Ecore files to build artifact -->
+                  <resource>
+                    <directory>${project.basedir}</directory>
+                    <includes>
+                      <include>META-INF/MANIFEST.MF</include>
+                      <include>src/main/ecore/**/*</include>
+                      <include>target/generated-sources/xtext-ecore/**/*</include>
+                      <include>plugin.properties</include>
+                      <include>plugin.xml</include>
+                    </includes>
+                  </resource>
+                  <!-- add Xtext files to build artifact -->
+                  <resource>
+                    <directory>${project.build.directory}/generated-sources/xtext-java</directory>
+                    <includes>
+                      <include>**/*.xtextbin</include>
+                      <include>**/*.xmi</include>
+                      <include>**/*.g</include>
+                      <include>**/*.tokens</include>
+                    </includes>
+                  </resource>
+                </resources>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
 
         <plugin>
