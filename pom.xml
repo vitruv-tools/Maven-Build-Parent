@@ -70,13 +70,13 @@
         <!-- delete `target` folder where all (also intermediate) build results are placed -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>3.4.1</version>
+          <version>3.5.0</version>
         </plugin>
 
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>3.6.1</version>
           <executions>
             <!-- add Xtend and generated code to classpath -->
             <execution>
@@ -135,7 +135,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
-          <version>3.5.0</version>
+          <version>3.5.1</version>
           <executions>
             <!-- generate code from Ecore meta-models and Xtext grammars -->
             <execution>
@@ -484,7 +484,7 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>10.24.0</version>
+              <version>10.25.0</version>
             </dependency>
           </dependencies>
           <configuration>
