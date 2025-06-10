@@ -411,6 +411,7 @@
                 <head>EMF ordered</head>
               </tag>
             </tags>
+            <sourcepath>target/ecore</sourcepath>
           </configuration>
         </plugin>
 
