@@ -281,6 +281,9 @@
                     <includes>
                       <include>META-INF/MANIFEST.MF</include>
                       <include>src/main/ecore/**/*</include>
+                      <include>target/generated-sources/ecore/**/*</include>
+                      <include>target/generated-sources/xtend/**/*</include>
+                      <include>target/generated-sources/annotations/**/*</include>
                       <include>target/generated-sources/xtext-ecore/**/*</include>
                       <include>plugin.properties</include>
                       <include>plugin.xml</include>
@@ -411,6 +414,7 @@
                 <head>EMF ordered</head>
               </tag>
             </tags>
+            <sourcepath>target/ecore</sourcepath>
           </configuration>
         </plugin>
 
