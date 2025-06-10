@@ -16,21 +16,21 @@ Remember to replace `x.y.z` with the actual version you want to reference.
 </parent>
 ```
 
-If you want to use a snapshot version of the Maven build parent (or of any other dependency), you need to enable snapshot dependencies from the OSSRH repository as shown below.
+If you want to use a snapshot version of the Maven build parent (or of any other dependency), you need to enable snapshot dependencies from the maven central repository as shown below.
 
 ```
 <repositories>
     <!-- allow snapshots -->
     <repository>
-      <id>ossrh-snapshots</id>
-      <name>OSSRH Snapshots</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
+      <name>Central Portal Snapshots</name>
+      <id>central-portal-snapshots</id>
+      <url>https://central.sonatype.com/repository/maven-snapshots/</url>
       <releases>
         <enabled>false</enabled>
       </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
     </repository>
 </repositories>
 ```
@@ -358,10 +358,8 @@ The account credentials, as well as the PGP secret key, should be stored as GitH
 
 | Secret                        | Description                                                  |
 |-------------------------------|--------------------------------------------------------------|
-| OSSRH_USERNAME                | Username of your OSSRH user token (not your Sonatype login). |
-| OSSRH_TOKEN                   | Password of your OSSRH user token (nor your Sonatype login). |
-| OSSRH_GPG_SECRET_KEY          | Secret key generated with GPG.                               |
-| OSSRH_GPG_SECRET_KEY_PASSWORD | Password for the GPG secret key.                             |
+| CENTRAL_USERNAME              | Username of your maven central user token (not your Sonatype login). |
+| CENTRAL_PASSWORD              | Password of your maven central user token (nor your Sonatype login). |
 
 In addition, the project description in your POM needs to contain certain information described in the Sonatype requirements.
 While not all of the requirements need to be met for snapshot deployment, you should provide the information presented in the [example POM](https://central.sonatype.org/publish/requirements/#a-complete-example-pom).
