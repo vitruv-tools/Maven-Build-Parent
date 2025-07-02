@@ -411,7 +411,7 @@
                 <head>EMF ordered</head>
               </tag>
             </tags>
-            <sourcepath>target/ecore</sourcepath>
+            <sourcepath>src/main/java:target/generated-sources/xtend:target/generated-sources/ecore</sourcepath>
           </configuration>
         </plugin>
 
