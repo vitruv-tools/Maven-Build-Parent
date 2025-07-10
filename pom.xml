@@ -8,7 +8,7 @@
   <!-- Project Information -->
   <groupId>tools.vitruv</groupId>
   <artifactId>parent</artifactId>
-  <version>3.3.1-SNAPSHOT</version>
+  <version>3.3.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Vitruvius Maven Build Parent</name>
@@ -411,7 +411,8 @@
                 <head>EMF ordered</head>
               </tag>
             </tags>
-            <sourcepath>src/main/java:target/generated-sources/xtend:target/generated-sources/ecore</sourcepath>
+            <sourcepath>
+              src/main/java:target/generated-sources/xtend:target/generated-sources/ecore:target/generated-sources/xtext-java:target/generated-sources/xtext-ecore:src-gen/xtext</sourcepath>
           </configuration>
         </plugin>
 
