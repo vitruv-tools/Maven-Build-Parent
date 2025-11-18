@@ -314,7 +314,7 @@
 
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.4.2</version>
+          <version>3.5.0</version>
         </plugin>
 
         <!-- used for creating wrapper modules including dependencies from external repositories -->
