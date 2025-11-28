@@ -8,7 +8,7 @@
   <!-- Project Information -->
   <groupId>tools.vitruv</groupId>
   <artifactId>parent</artifactId>
-  <version>3.3.2-SNAPSHOT</version>
+  <version>3.3.2</version>
   <packaging>pom</packaging>
 
   <name>Vitruvius Maven Build Parent</name>
