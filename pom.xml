@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <!-- Project Information -->
   <groupId>tools.vitruv</groupId>
   <artifactId>parent</artifactId>
-  <version>3.3.3-SNAPSHOT</version>
+  <version>4.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
-
   <name>Vitruvius Maven Build Parent</name>
   <description>A common parent POM for all builds of vitruv.tools</description>
   <url>https://github.com/vitruv-tools/Maven-Build-Parent</url>
-
   <!-- Organizational Information -->
   <organization>
     <name>Vitruvius Tools</name>
     <url>https://vitruv.tools/</url>
   </organization>
-
   <developers>
     <developer>
       <name>Vitruvius Developers</name>
@@ -29,20 +24,17 @@
       <organizationUrl>https://kit.edu</organizationUrl>
     </developer>
   </developers>
-
   <licenses>
     <license>
       <name>Eclipse Public License - v 2.0</name>
       <url>https://www.eclipse.org/legal/epl-2.0/</url>
     </license>
   </licenses>
-
   <scm>
     <connection>scm:git:git://github.com/vitruv-tools/Maven-Build-Parent.git</connection>
     <developerConnection>scm:git:https://github.com/vitruv-tools/Maven-Build-Parent.git</developerConnection>
     <url>https://github.com/vitruv-tools/Maven-Build-Parent/tree/main</url>
   </scm>
-
   <distributionManagement>
     <snapshotRepository>
       <id>central</id>
@@ -53,17 +45,15 @@
       <url>https://central.sonatype.com</url>
     </repository>
   </distributionManagement>
-
   <!-- Build Definition -->
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>17</maven.compiler.release>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.release>21</maven.compiler.release>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
     <!-- default value, actual value is set by profiles depending on OS -->
     <swt.platform />
   </properties>
-
   <build>
     <pluginManagement>
       <plugins>
@@ -72,7 +62,6 @@
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.5.0</version>
         </plugin>
-
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>build-helper-maven-plugin</artifactId>
@@ -131,7 +120,6 @@
             </execution>
           </executions>
         </plugin>
-
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
@@ -147,14 +135,16 @@
               <configuration>
                 <mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
                 <arguments>
-                  <!-- worflow file must be placed in `workflow` directory and named `generate.mwe2` -->
+                  <!-- workflow file must be placed in `workflow` directory and named
+                  `generate.mwe2` -->
                   <argument>/${project.basedir}/workflow/generate.mwe2</argument>
                   <argument>-p</argument>
                   <argument>workspaceRoot=${project.basedir}</argument>
                 </arguments>
                 <classpathScope>compile</classpathScope>
                 <includePluginDependencies>true</includePluginDependencies>
-                <cleanupDaemonThreads>false</cleanupDaemonThreads> <!-- see
+                <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                <!-- see
                 https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
               </configuration>
             </execution>
@@ -185,6 +175,7 @@
               <artifactId>org.eclipse.emf.mwe2.lib</artifactId>
               <version>2.26.0</version>
             </dependency>
+            <!-- FIX: bumped from 2.41.0 to 2.43.0 to match xtext-maven-plugin version -->
             <dependency>
               <groupId>org.eclipse.xtext</groupId>
               <artifactId>org.eclipse.xtext.common.types</artifactId>
@@ -197,7 +188,6 @@
             </dependency>
           </dependencies>
         </plugin>
-
         <plugin>
           <!-- if Xtend code is referenced from the DSL and vice versa, the Xtend code needs to be
           processed by the xtext-maven-plugin as well -->
@@ -215,18 +205,21 @@
           </executions>
           <dependencies>
             <!-- required for DSLs that generate Xtend code -->
+            <!-- FIX: groupId changed from org.eclipse.xtend to org.eclipse.xtext (relocated in
+            2.40) -->
             <dependency>
-              <groupId>org.eclipse.xtend</groupId>
+              <groupId>org.eclipse.xtext</groupId>
               <artifactId>org.eclipse.xtend.core</artifactId>
               <version>2.43.0</version>
             </dependency>
           </dependencies>
         </plugin>
-
         <plugin>
-          <groupId>org.eclipse.xtend</groupId>
+          <!-- FIX: groupId changed from org.eclipse.xtend to org.eclipse.xtext (relocated in 2.40) -->
+          <!-- FIX: version bumped from 2.42.0 to 2.43.0 to match xtext-maven-plugin -->
+          <groupId>org.eclipse.xtext</groupId>
           <artifactId>xtend-maven-plugin</artifactId>
-          <version>2.42.0</version>
+          <version>2.43.0</version>
           <executions>
             <!-- generate Java code from Xtend code -->
             <execution>
@@ -261,7 +254,6 @@
             </dependency>
           </dependencies>
         </plugin>
-
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.5.0</version>
@@ -301,22 +293,35 @@
             </execution>
           </executions>
         </plugin>
-
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.15.0</version>
         </plugin>
-
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.6</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.junit.platform</groupId>
+              <artifactId>junit-platform-launcher</artifactId>
+              <version>6.1.0</version>
+            </dependency>
+            <dependency>
+              <groupId>org.junit.platform</groupId>
+              <artifactId>junit-platform-engine</artifactId>
+              <version>6.1.0</version>
+            </dependency>
+            <dependency>
+              <groupId>org.junit.jupiter</groupId>
+              <artifactId>junit-jupiter-engine</artifactId>
+              <version>6.1.0</version>
+            </dependency>
+          </dependencies>
         </plugin>
-
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.5.0</version>
         </plugin>
-
         <!-- used for creating wrapper modules including dependencies from external repositories -->
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -339,7 +344,6 @@
             </execution>
           </executions>
         </plugin>
-
         <!-- used for creating wrapper modules including dependencies from external repositories -->
         <plugin>
           <artifactId>maven-shade-plugin</artifactId>
@@ -366,7 +370,6 @@
             </execution>
           </executions>
         </plugin>
-
         <plugin>
           <artifactId>maven-source-plugin</artifactId>
           <version>3.4.0</version>
@@ -380,7 +383,6 @@
             </execution>
           </executions>
         </plugin>
-
         <plugin>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>3.12.0</version>
@@ -415,7 +417,6 @@
               src/main/java:target/generated-sources/xtend:target/generated-sources/ecore:target/generated-sources/xtext-java:target/generated-sources/xtext-ecore:src-gen/xtext</sourcepath>
           </configuration>
         </plugin>
-
         <plugin>
           <artifactId>maven-gpg-plugin</artifactId>
           <version>3.2.8</version>
@@ -435,7 +436,6 @@
             </gpgArguments>
           </configuration>
         </plugin>
-
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
@@ -455,18 +455,15 @@
             </execution>
           </executions>
         </plugin>
-
         <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
           <version>5.7.0.6970</version>
         </plugin>
-
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>3.1.4</version>
         </plugin>
-
         <plugin>
           <groupId>org.sonatype.central</groupId>
           <artifactId>central-publishing-maven-plugin</artifactId>
@@ -477,7 +474,6 @@
             <autoPublish>true</autoPublish>
           </configuration>
         </plugin>
-
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
@@ -505,11 +501,9 @@
             </execution>
           </executions>
         </plugin>
-
       </plugins>
     </pluginManagement>
   </build>
-
   <profiles>
     <profile>
       <id>snapshot</id>
@@ -521,7 +515,6 @@
         </plugins>
       </build>
     </profile>
-
     <profile>
       <id>release</id>
       <build>
@@ -542,7 +535,6 @@
         </plugins>
       </build>
     </profile>
-
     <profile>
       <id>coverage</id>
       <build>
@@ -554,7 +546,6 @@
         </plugins>
       </build>
     </profile>
-
     <!-- Eclipse SWT has different implementations from different platforms, which cannot be
     resolved automatically -->
     <!-- macOS profile -->
@@ -569,7 +560,7 @@
         <swt.platform>cocoa.macosx.${os.arch}</swt.platform>
       </properties>
     </profile>
-    <!-- Linux profile-->
+    <!-- Linux profile -->
     <profile>
       <id>unix</id>
       <activation>
@@ -622,7 +613,6 @@
       </properties>
     </profile>
   </profiles>
-
   <!-- Dependency and Plugin Repositories -->
   <repositories>
     <!-- Maven Central should have priority -->
@@ -634,7 +624,6 @@
         <enabled>false</enabled>
       </snapshots>
     </repository>
-
     <!-- disable snapshot repositories -->
     <repository>
       <id>ossrh-snapshots</id>
@@ -670,7 +659,6 @@
       </snapshots>
     </repository>
   </repositories>
-
   <pluginRepositories>
     <!-- Maven Central should have priority -->
     <pluginRepository>
@@ -681,7 +669,6 @@
         <enabled>false</enabled>
       </snapshots>
     </pluginRepository>
-
     <!-- disable snapshot repositories -->
     <pluginRepository>
       <id>ossrh-snapshots</id>
