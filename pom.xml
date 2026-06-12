@@ -135,7 +135,8 @@
               <configuration>
                 <mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
                 <arguments>
-                  <!-- workflow file must be placed in `workflow` directory and named `generate.mwe2` -->
+                  <!-- workflow file must be placed in `workflow` directory and named
+                  `generate.mwe2` -->
                   <argument>/${project.basedir}/workflow/generate.mwe2</argument>
                   <argument>-p</argument>
                   <argument>workspaceRoot=${project.basedir}</argument>
@@ -204,7 +205,8 @@
           </executions>
           <dependencies>
             <!-- required for DSLs that generate Xtend code -->
-            <!-- FIX: groupId changed from org.eclipse.xtend to org.eclipse.xtext (relocated in 2.40) -->
+            <!-- FIX: groupId changed from org.eclipse.xtend to org.eclipse.xtext (relocated in
+            2.40) -->
             <dependency>
               <groupId>org.eclipse.xtext</groupId>
               <artifactId>org.eclipse.xtend.core</artifactId>
@@ -297,7 +299,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.5.5</version>
+          <version>3.5.6</version>
           <dependencies>
             <dependency>
               <groupId>org.junit.platform</groupId>
@@ -437,7 +439,7 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.14</version>
+          <version>0.8.15</version>
           <executions>
             <execution>
               <id>prepare-agent</id>
@@ -456,7 +458,7 @@
         <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
-          <version>5.6.0.6792</version>
+          <version>5.6.0.6970</version>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -480,7 +482,7 @@
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>13.4.2</version>
+              <version>13.5.0</version>
             </dependency>
           </dependencies>
           <configuration>
